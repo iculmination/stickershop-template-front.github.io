@@ -5,6 +5,7 @@ import { Youtube } from "lucide-react";
 import { Home } from "lucide-react";
 import { Mail } from "lucide-react";
 import { Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
 const Footer = () => {
@@ -54,8 +55,8 @@ const Footer = () => {
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="">
             <Button className="-ml-2 -mt-1 mb-2" variant="ghost">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className=" flex items-center justify-center  font-semibold uppercase md:justify-start"
               >
                 <svg
@@ -67,7 +68,7 @@ const Footer = () => {
                   <path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                 </svg>
                 Stickers Shop
-              </a>
+              </Link>
             </Button>
             <p>footer content, company description</p>
           </div>
@@ -117,9 +118,12 @@ const Footer = () => {
             </p>
             <p className="mb-4">
               <Button className="-m-2" variant="ghost">
-                <a href="/" className="text-neutral-600 dark:text-neutral-200">
+                <Link
+                  to="/catalog"
+                  className="text-neutral-600 dark:text-neutral-200"
+                >
                   Catalog
-                </a>
+                </Link>
               </Button>
             </p>
             <p className="mb-4">
@@ -184,9 +188,9 @@ const Footer = () => {
         <span>© 2024 Copyright </span>
         <a
           className="font-semibold text-neutral-600 dark:text-neutral-400"
-          href="/"
+          href="https://t.me/i_culmination"
         >
-          Yehor Husieiev
+          culmination
         </a>
       </div>
     </footer>

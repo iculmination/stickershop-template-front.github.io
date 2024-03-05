@@ -110,6 +110,7 @@ const Catalog = ({ selectedCategory }) => {
 };
 
 const categories = [
+  { id: "Popular" },
   { id: "exampleCategory1" },
   { id: "exampleCategory2" },
   { id: "exampleCategory3" },
@@ -131,7 +132,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
     <div className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow">
       <h2 className="text-xl">Categories</h2>
       <div className="w-full bg-violet-50 p-4 flex flex-col justify-start items-start mt-6 rounded-md text-md min-h-80">
-        {categories.map((el) => {
+        {categories.map((el, i) => {
           const buttonClassName =
             selectedCategory === el.id
               ? "focus:outline-none bg-white text-black p-4 pl-4 w-full transition duration-300"
@@ -143,39 +144,10 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
               ref={buttonRef}
               className={buttonClassName}
             >
-              Category
+              {i === 0 ? "Popular" : "Category " + i}
             </Button>
           );
         })}
-
-        {/* <Button
-          onClick={() => setSelectedCategory("exampleCategory2")}
-          variant="ghost"
-          className="focus:outline-none p-4 pl-4 w-full text-[#728299] hover:bg-violet-100 transition duration-300 focus:bg-white focus:text-black"
-        >
-          Category
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory("exampleCategory3")}
-          variant="ghost"
-          className="focus:outline-none p-4 pl-4 w-full text-[#728299] hover:bg-violet-100 transition duration-300 focus:bg-white focus:text-black"
-        >
-          Category
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory("exampleCategory4")}
-          variant="ghost"
-          className="focus:outline-none p-4 pl-4 w-full text-[#728299] hover:bg-violet-100 transition duration-300 focus:bg-white focus:text-black"
-        >
-          Category
-        </Button>
-        <Button
-          onClick={() => setSelectedCategory("exampleCategory5")}
-          variant="ghost"
-          className="text p-4 pl-4 w-full text-[#728299] hover:bg-violet-100 transition duration-300 focus:bg-white focus:text-black"
-        >
-          Category
-        </Button> */}
       </div>
     </div>
   );
@@ -183,32 +155,6 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 
 const CardElement = () => {
   return (
-    // <div className="group bg-gray-100 w-56 rounded-md h-80 flex flex-col transition duration-300 hover:shadow-sm hover:bg-gray-50">
-    //   <div className="flex flex-col justify-center items-center h-52">
-    //     <img
-    //       src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
-    //       alt=""
-    //       className="w-40 group-hover:scale-110 transition duration-300"
-    //     />
-    //   </div>
-    //   <hr class="w-4/5 h-1 mx-auto bg-gray-200 border-0 rounded-full" />
-
-    //   <div className="self-center flex flex-col w-4/5 pt-2">
-    //     <div className="flex justify-between w-full text-center">
-    //       <p className="text-lg text-[#728299]">React.js</p>
-    //       <p className="text-lg text-[#728299]">$5</p>
-    //     </div>
-    //     <p className="text-lg text-[#728299]">6 cm</p>
-    //   </div>
-    //   <Button
-    //     variant="outline"
-    //     className="opacity-0 group-hover:opacity-100 transition mt-2 duration-300 w-full h-10 bg-gray-300 rounded-b-md cursor-pointer hover:bg-gray-500 flex items-center justify-center"
-    //   >
-    //     <ShoppingCart/>
-    //     <p className="text-white text-lg text-center">ADD TO CART</p>
-    //   </Button>
-    // </div>
-
     <Card className="group w-56 ">
       <CardHeader className="flex flex-row justify-between">
         <div className="">

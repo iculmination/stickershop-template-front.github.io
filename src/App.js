@@ -5,22 +5,45 @@ import CatalogWithCategories from "./components/catalogWithCategories/CatalogWit
 import HomeCategoriesSection from "./components/homeCategoriesSection/HomeCategoriesSection";
 import HomeWithNew from "./components/homeWithNew/HomeWithNew";
 import Footer from "./components/footer/Footer";
+import SingleGood from "./components/singleItem/SingleItem";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("Popular");
 
   return (
     <>
-      <Header />
-      <div className=" bg-violet-100 w-full min-h-screen">
-        <CatalogWithCategories
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-        <HomeCategoriesSection setSelectedCategory={setSelectedCategory} />
-        <HomeWithNew />
-      </div>
-      <Footer />
+      <BrowserRouter>
+        <Header setSelectedCategory={setSelectedCategory} />
+        <div className=" bg-violet-100 w-full min-h-screen">
+          <Routes>
+            <Route
+              path="/catalog"
+              element={
+                <CatalogWithCategories
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                />
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <>
+                  <HomeCategoriesSection
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                  <HomeWithNew />
+                </>
+              }
+            />
+            <Route path='/:itemId'
+              element={<SingleGood/>}
+            />
+          </Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }

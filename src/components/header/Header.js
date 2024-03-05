@@ -1,30 +1,27 @@
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { UserRound } from "lucide-react";
 import { Input } from "../ui/input";
 import { Search } from "lucide-react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "..//ui/navigation-menu";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ setSelectedCategory }) => {
   return (
     <header className="bg-white w-full drop-shadow-md">
       <div className="container bg-white h-24 w-full flex justify-between items-center">
-        <a href="/">
+        <Link to="/">
           <img
             src="https://static-00.iconduck.com/assets.00/sticker-icon-512x512-rzveai8i.png"
             alt=""
             className="w-12 ml-4 cursor-pointer"
           />
-        </a>
+        </Link>
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input type="email" placeholder="Search" />
           <Button type="submit" size="icon">
@@ -33,14 +30,19 @@ const Header = () => {
         </div>
         <NavigationMenu>
           <NavigationMenuList>
+          
             <NavigationMenuItem>
-              <a href="/catalog">
+              <Link to="/catalog">
                 <NavigationMenuLink>
-                  <Button variant="ghost" size="">
+                  <Button
+                    variant="ghost"
+                    size=""
+                    onClick={() => setSelectedCategory("Popular")}
+                  >
                     Catalog
                   </Button>
                 </NavigationMenuLink>
-              </a>
+              </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
@@ -63,6 +65,7 @@ const Header = () => {
               </a>
             </NavigationMenuItem>
           </NavigationMenuList>
+
         </NavigationMenu>
       </div>
     </header>
