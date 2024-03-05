@@ -31,6 +31,8 @@ import {
   PaginationPrevious,
 } from "../ui/pagination";
 
+import { Link } from "react-router-dom";
+
 const CatalogWithCategories = ({ selectedCategory, setSelectedCategory }) => {
   return (
     <section className="container w-full flex gap-6 pt-6 pb-6">
@@ -155,22 +157,26 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 
 const CardElement = () => {
   return (
-    <Card className="group w-56 ">
-      <CardHeader className="flex flex-row justify-between">
-        <div className="">
-          <CardTitle>React.js</CardTitle>
-          <CardDescription>6 cm x 6 cm</CardDescription>
-        </div>
-        <CardTitle className="text-2xl">$5</CardTitle>
-      </CardHeader>
+    <Card className="group w-56 cursor-pointer">
+      <Link to="/21673">
+        <CardHeader className="flex flex-row justify-between">
+          <div className="">
+            <CardTitle>React.js</CardTitle>
+            <CardDescription>6 cm x 6 cm</CardDescription>
+          </div>
+          <CardTitle className="text-2xl">$5</CardTitle>
+        </CardHeader>
+      </Link>
       <CardContent>
-        <div className="flex flex-col justify-center items-center h-52">
-          <img
-            src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
-            alt=""
-            className="w-40 group-hover:scale-110 transition duration-300"
-          />
-        </div>
+        <Link to="/21673">
+          <div className="flex flex-col justify-center items-center h-52">
+            <img
+              src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
+              alt=""
+              className="w-40 group-hover:scale-110 transition duration-300"
+            />
+          </div>
+        </Link>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button className="w-full">
