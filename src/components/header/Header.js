@@ -30,7 +30,6 @@ const Header = ({ setSelectedCategory }) => {
         </div>
         <NavigationMenu>
           <NavigationMenuList>
-          
             <NavigationMenuItem>
               <Link to="/catalog">
                 <NavigationMenuLink>
@@ -46,26 +45,25 @@ const Header = ({ setSelectedCategory }) => {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <a href="/user">
+              <Link to="/auth/login">
                 <NavigationMenuLink>
                   <Button variant="ghost" size="icon">
                     <UserRound className="w-5" />
                   </Button>
                 </NavigationMenuLink>
-              </a>
+              </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <a href="/cart">
+              <Link to="/cart">
                 <NavigationMenuLink>
                   <Button variant="ghost" size="icon">
                     <ShoppingCart className="w-5" />
                   </Button>
                 </NavigationMenuLink>
-              </a>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
-
         </NavigationMenu>
       </div>
     </header>

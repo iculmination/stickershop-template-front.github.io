@@ -157,7 +157,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 
 const CardElement = () => {
   return (
-    <Card className="group w-56 cursor-pointer">
+    <Card className="group w-56 cursor-pointer" key=''>
       <Link to="/21673">
         <CardHeader className="flex flex-row justify-between">
           <div className="">
@@ -168,7 +168,7 @@ const CardElement = () => {
         </CardHeader>
       </Link>
       <CardContent>
-        <Link to="/21673">
+        <Link to="/item/34512">
           <div className="flex flex-col justify-center items-center h-52">
             <img
               src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"

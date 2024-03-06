@@ -14,7 +14,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory1")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 1
             </h2>
           </Link>
@@ -23,7 +23,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory2")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 2
             </h2>
           </Link>
@@ -32,7 +32,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory3")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md row-span-2"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 3
             </h2>
           </Link>
@@ -41,7 +41,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory4")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md col-span-2"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 4
             </h2>
           </Link>
@@ -50,7 +50,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory5")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 5
             </h2>
           </Link>
@@ -59,7 +59,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             onClick={() => setSelectedCategory("exampleCategory6")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md col-span-2"
           >
-            <h2 className="text-4xl font-bold p-8 text-white">
+            <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 6
             </h2>
           </Link>

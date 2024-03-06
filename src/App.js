@@ -7,6 +7,7 @@ import HomeWithNew from "./components/homeWithNew/HomeWithNew";
 import Footer from "./components/footer/Footer";
 import SingleGood from "./components/singleItem/SingleItem";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./components/auth/Auth";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
@@ -37,9 +38,8 @@ function App() {
                 </>
               }
             />
-            <Route path='/:itemId'
-              element={<SingleGood/>}
-            />
+            <Route path="/item/:itemId" element={<SingleGood />} />
+            <Route path="/auth/:auth" element={<Auth />} />
           </Routes>
         </div>
         <Footer />

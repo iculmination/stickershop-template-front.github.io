@@ -3,18 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
   CardContent,
-  CardFooter,
 } from "../ui/card";
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useParams } from "react-router-dom";
 
 const SingleGood = () => {
-  // Destructure the parameter from the object returned by useParams
   const { itemId } = useParams();
 
   return (
