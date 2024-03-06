@@ -12,7 +12,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory1")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 1
@@ -21,7 +21,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory2")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 2
@@ -30,7 +30,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory3")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md row-span-2"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md row-span-2"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 3
@@ -39,7 +39,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory4")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md col-span-2"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md col-span-2"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 4
@@ -48,7 +48,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory5")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 5
@@ -57,7 +57,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           <Link
             to="/catalog"
             onClick={() => setSelectedCategory("exampleCategory6")}
-            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-105 bg-violet-300 w-full min-h-72 rounded-md col-span-2"
+            className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-72 rounded-md col-span-2"
           >
             <h2 className="text-3xl font-bold p-8 text-white">
               Stickers category 6

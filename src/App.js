@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/header/Header";
 import CatalogWithCategories from "./components/catalogWithCategories/CatalogWithCategories";
 import HomeCategoriesSection from "./components/homeCategoriesSection/HomeCategoriesSection";
@@ -11,6 +11,8 @@ import Auth from "./components/auth/Auth";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
+
+  useEffect(()=>{document.title='Stickers Shop'},[])
 
   return (
     <>

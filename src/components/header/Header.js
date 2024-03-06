@@ -1,13 +1,11 @@
-import { ShoppingCart } from "lucide-react";
-import { UserRound } from "lucide-react";
-import { Input } from "../ui/input";
-import { Search } from "lucide-react";
+import { UserRound, Search, ShoppingCart } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "..//ui/navigation-menu";
+} from "../ui/navigation-menu";
+import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 

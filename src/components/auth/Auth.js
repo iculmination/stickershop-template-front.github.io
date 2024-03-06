@@ -1,6 +1,7 @@
 import google from "./2702602.png";
 import facebook from "./Facebook_Logo_(2019).png";
-
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +21,7 @@ const schema = z.object({
 });
 
 const Auth = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const auth = useParams();
   const {
     register,
@@ -104,13 +106,25 @@ const Auth = () => {
             >
               Password
             </Label>
-            <Input
-              maxLength="45"
-              type="text"
-              id="password"
-              {...register("password")}
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-primary"
-            />
+            <div className="flex">
+              <Input
+                maxLength="45"
+                type={showPassword?"text":"password"}
+                id="password"
+                {...register("password")}
+                className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-primary"
+              />
+              <Button
+              type='button'
+                onClick={() => {
+                  setShowPassword(!showPassword);
+                }}
+                className="absolute mt-1 right-8 rounded-l-none"
+                variant="ghost"
+              >
+                {showPassword ? <EyeOff className="text-[#728299]"/> : <Eye className="text-[#728299]"/>}
+              </Button>
+            </div>
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
