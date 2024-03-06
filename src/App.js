@@ -8,11 +8,14 @@ import Footer from "./components/footer/Footer";
 import SingleGood from "./components/singleItem/SingleItem";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./components/auth/Auth";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
 
-  useEffect(()=>{document.title='Stickers Shop'},[])
+  useEffect(() => {
+    document.title = "Stickers Shop";
+  }, []);
 
   return (
     <>
@@ -42,6 +45,7 @@ function App() {
             />
             <Route path="/item/:itemId" element={<SingleGood />} />
             <Route path="/auth/:auth" element={<Auth />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
         <Footer />
