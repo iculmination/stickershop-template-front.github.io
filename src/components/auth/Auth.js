@@ -2,8 +2,7 @@ import google from "./2702602.png";
 import facebook from "./Facebook_Logo_(2019).png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -109,20 +108,24 @@ const Auth = () => {
             <div className="flex">
               <Input
                 maxLength="45"
-                type={showPassword?"text":"password"}
+                type={showPassword ? "text" : "password"}
                 id="password"
                 {...register("password")}
                 className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-primary"
               />
               <Button
-              type='button'
+                type="button"
                 onClick={() => {
                   setShowPassword(!showPassword);
                 }}
                 className="absolute mt-1 right-8 rounded-l-none"
                 variant="ghost"
               >
-                {showPassword ? <EyeOff className="text-[#728299]"/> : <Eye className="text-[#728299]"/>}
+                {showPassword ? (
+                  <EyeOff className="text-[#728299]" />
+                ) : (
+                  <Eye className="text-[#728299]" />
+                )}
               </Button>
             </div>
             {errors.password && (
@@ -141,11 +144,11 @@ const Auth = () => {
             <p className="ml-4 mr-4 text-sm">Or</p>
             <Separator className="w-2/5 " />
           </div>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" type="button">
             <img src={google} alt="" className="w-5 mr-2" />
             <p>{auth.auth === "login" ? "Log in" : "Register"} with Google</p>
           </Button>
-          <Button variant="outline" className="w-full mt-4">
+          <Button variant="outline" className="w-full mt-4" type="button">
             <img src={facebook} alt="" className="w-5 mr-2" />
             <p>{auth.auth === "login" ? "Log in" : "Register"} with Facebook</p>
           </Button>
