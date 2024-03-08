@@ -236,7 +236,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 const CardElement = ({ addCartItem, itemData }) => {
   return (
     <Card className="group w-56 cursor-pointer" key={itemData.id}>
-      <Link to="/item/21673">
+      <Link to={"/item/" + itemData.id}>
         <CardHeader className="flex flex-row justify-between">
           <div className="">
             <CardTitle>{itemData.name}</CardTitle>

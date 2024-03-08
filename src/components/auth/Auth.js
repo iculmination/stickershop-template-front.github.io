@@ -32,7 +32,6 @@ const Auth = () => {
   const onSubmit = async (data) => {
     console.log(data);
   };
-  console.log(auth);
   const emailField =
     auth.auth === "register" ? (
       <div className="mb-4">

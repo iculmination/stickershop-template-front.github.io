@@ -34,18 +34,55 @@ const Header = ({ setSelectedCategory }) => {
         </Link>
         <div className="flex w-full items-center max-w-xl space-x-2 ml-12 mr-8">
           <Input type="email" placeholder="Search" className="w-full" />
-          <Button type="submit" size="icon">
+          <Button type="submit" size="icon" className='w-12'>
             <Search className="w-5" />
           </Button>
         </div>
         <div className="hidden md:block">
-          <NavMenu setSelectedCategory={setSelectedCategory} />
+          <NavigationMenu className="">
+            <NavigationMenuList className="flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row">
+              <NavigationMenuItem>
+                <Link to="/catalog">
+                  <NavigationMenuLink>
+                    <Button
+                      variant="ghost"
+                      size=""
+                      type="submit"
+                      onClick={() => setSelectedCategory("Popular")}
+                    >
+                      Catalog
+                    </Button>
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link to="/auth/login">
+                  <NavigationMenuLink>
+                    <Button variant="ghost" size="icon">
+                      <UserRound className="w-5" />
+                    </Button>
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link to="/cart">
+                  <NavigationMenuLink>
+                    <Button variant="ghost" size="icon">
+                      <ShoppingCart className="w-5" />
+                    </Button>
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
 
         <Sheet className="">
           <SheetTrigger asChild>
-            <Button variant="ghost" className="md:hidden" size='icon'>
-              <Menu className=""/>
+            <Button variant="ghost" className="md:hidden" size="icon">
+              <Menu className="" />
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
@@ -55,7 +92,49 @@ const Header = ({ setSelectedCategory }) => {
                 A wide variety of stickers at a cheap price
               </SheetDescription>
             </SheetHeader>
-            <NavMenu setSelectedCategory={setSelectedCategory} />
+
+            <NavigationMenu className="">
+              <NavigationMenuList className="flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row">
+                <NavigationMenuItem>
+                  <Link to="/catalog">
+                    <NavigationMenuLink>
+                      <SheetClose asChild>
+                        <Button
+                          variant="ghost"
+                          size=""
+                          type="submit"
+                          onClick={() => setSelectedCategory("Popular")}
+                        >
+                          Catalog
+                        </Button>
+                      </SheetClose>
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/auth/login">
+                    <NavigationMenuLink>
+                      <SheetClose asChild>
+                        <Button variant="ghost" size="icon">
+                          <UserRound className="w-5" />
+                        </Button>
+                      </SheetClose>
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/cart">
+                    <NavigationMenuLink>
+                      <SheetClose asChild>
+                        <Button variant="ghost" size="icon">
+                          <ShoppingCart className="w-5" />
+                        </Button>
+                      </SheetClose>
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
             <SheetFooter>
               <SheetClose asChild>
@@ -66,49 +145,6 @@ const Header = ({ setSelectedCategory }) => {
         </Sheet>
       </div>
     </header>
-  );
-};
-
-const NavMenu = ({ setSelectedCategory }) => {
-  return (
-    <NavigationMenu className="">
-      <NavigationMenuList className='flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row'>
-        <NavigationMenuItem>
-          <Link to="/catalog">
-            <NavigationMenuLink>
-              <Button
-                variant="ghost"
-                size=""
-                type="submit"
-                onClick={() => setSelectedCategory("Popular")}
-              >
-                Catalog
-              </Button>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <Link to="/auth/login">
-            <NavigationMenuLink>
-              <Button variant="ghost" size="icon">
-                <UserRound className="w-5" />
-              </Button>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <Link to="/cart">
-            <NavigationMenuLink>
-              <Button variant="ghost" size="icon">
-                <ShoppingCart className="w-5" />
-              </Button>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
   );
 };
 

@@ -20,6 +20,89 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
 
+const goodsTemporary = [
+  {
+    id: 191,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 192,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 193,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 194,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 195,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 196,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 197,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 198,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 199,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 1190,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+];
+
 const HomeWithNew = ({ addCartItem }) => {
   return (
     <section className="container pb-6 w-full">
@@ -37,14 +120,15 @@ const HomeWithNew = ({ addCartItem }) => {
               }),
             ]}
           >
+            {/* md:basis-1/2 lg:basis-1/3 */}
             <CarouselContent>
-              {Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <CardElement addCartItem={addCartItem} />
-                  </div>
-                </CarouselItem>
-              ))}
+              {goodsTemporary.map((el) => {
+                return (
+                  <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                    <CardElement itemData={el} addCartItem={addCartItem} />
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
@@ -58,26 +142,26 @@ const HomeWithNew = ({ addCartItem }) => {
   );
 };
 
-const CardElement = ({ addCartItem }) => {
+const CardElement = ({ addCartItem, itemData }) => {
   return (
     <Card className="group ">
-      <Link to="/item/21673">
+      <Link to={"/item/" + itemData.id}>
         <CardHeader className="flex flex-row justify-between">
           <div className="">
             <CardTitle>
-              React.js
+              {itemData.name}
               <Badge className="ml-2" variant="secondary">
                 NEW
               </Badge>
             </CardTitle>
-            <CardDescription>6 cm x 6 cm</CardDescription>
+            <CardDescription>{itemData.size}</CardDescription>
           </div>
-          <CardTitle className="text-2xl">$5</CardTitle>
+          <CardTitle className="text-2xl">${itemData.price}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img
-              src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
+              src={itemData.thumbnail}
               alt=""
               className="w-40 group-hover:scale-110 transition duration-300"
             />
@@ -86,12 +170,7 @@ const CardElement = ({ addCartItem }) => {
       </Link>
 
       <CardFooter className="flex justify-between">
-        <Button
-          className="w-full"
-          onClick={() =>
-            addCartItem({ name: "React.js", price: 5, size: "6 cm x 6 cm" })
-          }
-        >
+        <Button className="w-full" onClick={() => addCartItem(itemData)}>
           <ShoppingCart className="w-4 mr-2" />
           ADD TO CART
         </Button>

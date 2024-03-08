@@ -22,8 +22,8 @@ const SingleGood = ({ addCartItem }) => {
           </div>
           <div className="mt-6">
             <h1 className="text-3xl font-semibold mb-2 flex">
-              {itemId}{" "}
-              <Badge variant="" className="mt-1 ml-2">
+              {itemId}
+              <Badge variant="" className="mt-1 mb-1 ml-2">
                 NEW
               </Badge>
             </h1>
@@ -31,7 +31,7 @@ const SingleGood = ({ addCartItem }) => {
             <p className="text-gray-600 mb-4">
               Description: description of the sticker description of the sticker
               description of the sticker description of the sticker description
-              of the sticker{" "}
+              of the sticker
             </p>
             <h2 className="text-2xl font-semibold mb-4">$5</h2>
             <Button
