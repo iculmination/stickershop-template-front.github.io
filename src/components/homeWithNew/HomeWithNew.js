@@ -24,12 +24,12 @@ const HomeWithNew = () => {
     <section className="container pb-6 w-full">
       <div className="bg-white min-h-96 rounded-md w-full flex flex-col justify-center pb-6">
         <h1 className="text-4xl pl-10 pt-8 text-[#728299]">New</h1>
-        <div className="p-10 w-full gap-6 justify-center flex flex-wrap">
+        <div className="p-10 w-full gap-4 lg:gap-6 justify-center flex flex-wrap">
           <Carousel
             opts={{
               align: "start",
             }}
-            className="w-3/5"
+            className="w-4/5"
             plugins={[
               Autoplay({
                 delay: 4000,
@@ -49,7 +49,7 @@ const HomeWithNew = () => {
             <CarouselNext />
           </Carousel>
         </div>
-        <Button className="w-2/4 self-center" size="lg">
+        <Button className="w-1/2 self-center" size="lg">
           To catalog
         </Button>
       </div>
@@ -59,7 +59,7 @@ const HomeWithNew = () => {
 
 const CardElement = () => {
   return (
-    <Card className="group w-56 ">
+    <Card className="group ">
       <CardHeader className="flex flex-row justify-between">
         <div className="">
           <CardTitle>

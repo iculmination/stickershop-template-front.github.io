@@ -1,4 +1,4 @@
-import { UserRound, Search, ShoppingCart } from "lucide-react";
+import { UserRound, Search, ShoppingCart, Menu } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,6 +8,18 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import { Label } from "../ui/label";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../ui/sheet";
+import { set } from "react-hook-form";
 
 const Header = ({ setSelectedCategory }) => {
   return (
@@ -20,51 +32,83 @@ const Header = ({ setSelectedCategory }) => {
             className="w-12 ml-4 cursor-pointer"
           />
         </Link>
-        <div className="flex w-full max-w-sm items-center space-x-2">
-          <Input type="email" placeholder="Search" />
+        <div className="flex w-full items-center max-w-xl space-x-2 ml-12 mr-8">
+          <Input type="email" placeholder="Search" className="w-full" />
           <Button type="submit" size="icon">
             <Search className="w-5" />
           </Button>
         </div>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link to="/catalog">
-                <NavigationMenuLink>
-                  <Button
-                    variant="ghost"
-                    size=""
-                    onClick={() => setSelectedCategory("Popular")}
-                  >
-                    Catalog
-                  </Button>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+        <div className="hidden md:block">
+          <NavMenu setSelectedCategory={setSelectedCategory} />
+        </div>
 
-            <NavigationMenuItem>
-              <Link to="/auth/login">
-                <NavigationMenuLink>
-                  <Button variant="ghost" size="icon">
-                    <UserRound className="w-5" />
-                  </Button>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+        <Sheet className="">
+          <SheetTrigger asChild>
+            <Button variant="ghost" className="md:hidden" size='icon'>
+              <Menu className=""/>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right">
+            <SheetHeader>
+              <SheetTitle>Stickers Shop</SheetTitle>
+              <SheetDescription>
+                A wide variety of stickers at a cheap price
+              </SheetDescription>
+            </SheetHeader>
+            <NavMenu setSelectedCategory={setSelectedCategory} />
 
-            <NavigationMenuItem>
-              <Link to="/cart">
-                <NavigationMenuLink>
-                  <Button variant="ghost" size="icon">
-                    <ShoppingCart className="w-5" />
-                  </Button>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button type="submit">Close</Button>
+              </SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
+  );
+};
+
+const NavMenu = ({ setSelectedCategory }) => {
+  return (
+    <NavigationMenu className="">
+      <NavigationMenuList className='flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row'>
+        <NavigationMenuItem>
+          <Link to="/catalog">
+            <NavigationMenuLink>
+              <Button
+                variant="ghost"
+                size=""
+                type="submit"
+                onClick={() => setSelectedCategory("Popular")}
+              >
+                Catalog
+              </Button>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link to="/auth/login">
+            <NavigationMenuLink>
+              <Button variant="ghost" size="icon">
+                <UserRound className="w-5" />
+              </Button>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link to="/cart">
+            <NavigationMenuLink>
+              <Button variant="ghost" size="icon">
+                <ShoppingCart className="w-5" />
+              </Button>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
 

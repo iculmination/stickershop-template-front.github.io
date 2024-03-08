@@ -14,7 +14,7 @@ import { Separator } from "../ui/separator";
 const schema = z.object({
   login: z
     .string()
-    .min(4, { message: "Login must contain at least 3 characters" }),
+    .min(4, { message: "Login must contain at least 4 characters" }),
   email: z.string().min(1, { message: "Email field cannot be empty" }),
   password: z.string().min(1, { message: "Password field cannot be empty" }),
 });
@@ -70,8 +70,8 @@ const Auth = () => {
       </Link>
     );
   return (
-    <section className="container pb-36 pt-36 w-full flex flex-col justify-center items-center">
-      <div className="bg-white min-h-96  rounded-md w-1/3 flex flex-col justify-center pb-6 drop-shadow">
+    <section className="container pb-12 pt-12 lg:pb-36 lg:pt-36 w-full flex flex-col justify-center items-center">
+      <div className="bg-white min-h-96  rounded-md w-full md:w-1/2 lg:w-1/3 flex flex-col justify-center pb-6 drop-shadow">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mx-auto w-full pt-8 pr-8 pl-8 focus:outline-none flex flex-col"
