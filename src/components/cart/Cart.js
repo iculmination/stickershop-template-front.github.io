@@ -73,11 +73,13 @@ const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
       className="bg-white max-h-32 rounded-md pl-4 pr-4 lg:pl-10 lg:pr-10 pt-4 pb-4 flex justify-between items-center"
       key={itemData.id}
     >
-      <img
-        src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
-        alt=""
-        className="w-10 md:w-16"
-      />
+      <Link to={"/item/" + itemData.id}>
+        <img
+          src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
+          alt=""
+          className="w-10 md:w-16"
+        />
+      </Link>
       <Link to={"/item/" + itemData.id}>
         <div className="">
           <h2 className="font-semibold md:text-xl">{itemData.name}</h2>

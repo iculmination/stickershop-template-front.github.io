@@ -5,13 +5,14 @@ import { Card, CardContent } from "../ui/card";
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useParams } from "react-router-dom";
+import { Separator } from "../ui/separator";
 
 const SingleGood = ({ addCartItem }) => {
   const { itemId } = useParams();
 
   return (
-    <section className="container pt-6 pb-6 flex justify-between items-center gap-10">
-      <Card className="w-full md:w-2/3 lg:w-1/2 xl:w-2/3 p-6 min-h-96">
+    <section className="container pt-6 pb-6 lg:flex relative min-h-[700px] lg:justify-between items-center gap-10">
+      <Card className="w-full lg:w-2/5 p-6 h-full ">
         <CardContent>
           <div className="flex justify-center items-center">
             <img
@@ -28,19 +29,22 @@ const SingleGood = ({ addCartItem }) => {
               </Badge>
             </h1>
             <p className="text-gray-600 mb-4">Size: 6 cm x 6 cm</p>
-            <p className="text-gray-600 mb-4">
+            {/* <p className="text-gray-600 mb-4">
               Description: description of the sticker description of the sticker
               description of the sticker description of the sticker description
               of the sticker
-            </p>
+            </p> */}
             <h2 className="text-2xl font-semibold mb-4">$5</h2>
             <Button
               className="w-full"
               onClick={() =>
                 addCartItem({
+                  id: itemId,
                   name: "React.js",
                   price: 5,
                   size: "6 cm x 6 cm",
+                  thumbnail:
+                    "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
                 })
               }
             >
@@ -51,12 +55,23 @@ const SingleGood = ({ addCartItem }) => {
         </CardContent>
       </Card>
 
-      <div className="bg-white w-full rounded-md p-6 drop-shadow min-h-96">
-        <h2 className="text-xl font-semibold mb-4">Characteristics:</h2>
+      <div className="bg-white w-full lg:w-3/5 rounded-md p-6 h-full drop-shadow mt-8 mb-8">
+        <h2 className="text-3xl font-semibold mb-4">Characteristics:</h2>
         <ul className="text-gray-600">
+          <Separator className="mb-2 mt-2" />
+          <li className="max-w-[600px]">
+            Description: description of the sticker description of the sticker
+            description of the sticker description of the sticker description of
+            the sticker
+          </li>
+          <Separator className="mb-2 mt-2" />
           <li>Material: Vinyl</li>
+          <Separator className="mb-2 mt-2" />
           <li>Sizes: Small, Medium, Large</li>
+          <Separator className="mb-2 mt-2" />
           <li>Colors: Red, Blue, Green</li>
+          <Separator className="mb-2 mt-2" />
+          <li>In stock: {itemId}</li>
         </ul>
       </div>
     </section>

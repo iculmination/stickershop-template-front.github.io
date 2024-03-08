@@ -31,7 +31,13 @@ function App() {
   }, []);
 
   const addCartItem = (newItem) => {
-    setCartItems((prevState) => [...prevState, { ...newItem, quantity: 1 }]);
+    const existingItem = cartItems.find((item) => item.id === newItem.id);
+
+    if (existingItem) {
+      editCartItem(existingItem.id, existingItem.quantity + 1);
+    } else {
+      setCartItems((prevState) => [...prevState, { ...newItem, quantity: 1 }]);
+    }
   };
 
   const removeCartItem = (itemToRemove) => {
