@@ -18,8 +18,9 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { Link } from "react-router-dom";
 
-const HomeWithNew = () => {
+const HomeWithNew = ({ addCartItem }) => {
   return (
     <section className="container pb-6 w-full">
       <div className="bg-white min-h-96 rounded-md w-full flex flex-col justify-center pb-6">
@@ -40,7 +41,7 @@ const HomeWithNew = () => {
               {Array.from({ length: 10 }).map((_, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <CardElement />
+                    <CardElement addCartItem={addCartItem} />
                   </div>
                 </CarouselItem>
               ))}
@@ -57,32 +58,40 @@ const HomeWithNew = () => {
   );
 };
 
-const CardElement = () => {
+const CardElement = ({ addCartItem }) => {
   return (
     <Card className="group ">
-      <CardHeader className="flex flex-row justify-between">
-        <div className="">
-          <CardTitle>
-            React.js
-            <Badge className="ml-2" variant="secondary">
-              NEW
-            </Badge>
-          </CardTitle>
-          <CardDescription>6 cm x 6 cm</CardDescription>
-        </div>
-        <CardTitle className="text-2xl">$5</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-col justify-center items-center h-52">
-          <img
-            src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
-            alt=""
-            className="w-40 group-hover:scale-110 transition duration-300"
-          />
-        </div>
-      </CardContent>
+      <Link to="/item/21673">
+        <CardHeader className="flex flex-row justify-between">
+          <div className="">
+            <CardTitle>
+              React.js
+              <Badge className="ml-2" variant="secondary">
+                NEW
+              </Badge>
+            </CardTitle>
+            <CardDescription>6 cm x 6 cm</CardDescription>
+          </div>
+          <CardTitle className="text-2xl">$5</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col justify-center items-center h-52">
+            <img
+              src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
+              alt=""
+              className="w-40 group-hover:scale-110 transition duration-300"
+            />
+          </div>
+        </CardContent>
+      </Link>
+
       <CardFooter className="flex justify-between">
-        <Button className="w-full">
+        <Button
+          className="w-full"
+          onClick={() =>
+            addCartItem({ name: "React.js", price: 5, size: "6 cm x 6 cm" })
+          }
+        >
           <ShoppingCart className="w-4 mr-2" />
           ADD TO CART
         </Button>

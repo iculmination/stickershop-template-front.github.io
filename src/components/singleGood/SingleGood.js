@@ -1,15 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-} from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useParams } from "react-router-dom";
 
-const SingleGood = () => {
+const SingleGood = ({ addCartItem }) => {
   const { itemId } = useParams();
 
   return (
@@ -37,7 +34,16 @@ const SingleGood = () => {
               of the sticker{" "}
             </p>
             <h2 className="text-2xl font-semibold mb-4">$5</h2>
-            <Button className="w-full">
+            <Button
+              className="w-full"
+              onClick={() =>
+                addCartItem({
+                  name: "React.js",
+                  price: 5,
+                  size: "6 cm x 6 cm",
+                })
+              }
+            >
               <ShoppingCart className="w-4 mr-2" />
               ADD TO CART
             </Button>

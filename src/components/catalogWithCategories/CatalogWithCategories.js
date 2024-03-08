@@ -33,19 +33,23 @@ import {
 
 import { Link } from "react-router-dom";
 
-const CatalogWithCategories = ({ selectedCategory, setSelectedCategory }) => {
+const CatalogWithCategories = ({
+  selectedCategory,
+  setSelectedCategory,
+  addCartItem,
+}) => {
   return (
     <section className="container w-full flex gap-6 pt-6 pb-6">
       <Categories
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <Catalog selectedCategory={selectedCategory} />
+      <Catalog selectedCategory={selectedCategory} addCartItem={addCartItem} />
     </section>
   );
 };
 
-const Catalog = ({ selectedCategory }) => {
+const Catalog = ({ selectedCategory, addCartItem }) => {
   // const [sort, setSort] = useState("top");
 
   return (
@@ -70,18 +74,18 @@ const Catalog = ({ selectedCategory }) => {
         </Select>
       </div>
       <div className="w-full gap-5 justify-center flex flex-wrap">
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
-        <CardElement />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
+        <CardElement addCartItem={addCartItem} />
       </div>
       <Pagination className="mt-8">
         <PaginationContent>
@@ -155,10 +159,10 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
   );
 };
 
-const CardElement = () => {
+const CardElement = ({ addCartItem }) => {
   return (
-    <Card className="group w-56 cursor-pointer" key=''>
-      <Link to="/21673">
+    <Card className="group w-56 cursor-pointer" key="">
+      <Link to="/item/21673">
         <CardHeader className="flex flex-row justify-between">
           <div className="">
             <CardTitle>React.js</CardTitle>
@@ -166,9 +170,8 @@ const CardElement = () => {
           </div>
           <CardTitle className="text-2xl">$5</CardTitle>
         </CardHeader>
-      </Link>
-      <CardContent>
-        <Link to="/item/34512">
+
+        <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img
               src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
@@ -176,10 +179,16 @@ const CardElement = () => {
               className="w-40 group-hover:scale-110 transition duration-300"
             />
           </div>
-        </Link>
-      </CardContent>
+        </CardContent>
+      </Link>
+
       <CardFooter className="flex justify-between">
-        <Button className="w-full">
+        <Button
+          className="w-full"
+          onClick={() =>
+            addCartItem({ name: "React.js", price: 5, size: "6 cm x 6 cm" })
+          }
+        >
           <ShoppingCart className="w-4 mr-2" />
           ADD TO CART
         </Button>

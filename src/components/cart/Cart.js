@@ -4,23 +4,23 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useEffect, useState } from "react";
 
-const cartItems = [
-  { name: "React.js", price: 5, size: "6 cm x 6 cm" },
-  { name: "React.js", price: 7, size: "4 cm x 6 cm" },
-  { name: "React.js", price: 25, size: "6 cm x 20 cm" },
-  { name: "React.js", price: 10, size: "6 cm x 6 cm" },
-  { name: "React.js", price: 3, size: "8 cm x 6 cm" },
-  { name: "React.js", price: 1, size: "6 cm x 9 cm" },
-];
+// const cartItems = [
+//   { name: "React.js", price: 5, size: "6 cm x 6 cm" },
+//   { name: "React.js", price: 7, size: "4 cm x 6 cm" },
+//   { name: "React.js", price: 25, size: "6 cm x 20 cm" },
+//   { name: "React.js", price: 10, size: "6 cm x 6 cm" },
+//   { name: "React.js", price: 3, size: "8 cm x 6 cm" },
+//   { name: "React.js", price: 1, size: "6 cm x 9 cm" },
+// ];
 
-const Cart = () => {
-  const [total, setTotal] = useState(0);
+const Cart = ({ cartItems, removeCartItem }) => {
+  // const [total, setTotal] = useState(0);
 
   // useEffect(()=>{setTotal(cartItems.map((el)=>{el.price}))},[])
 
   return (
     <section className="container pt-8 pb-8 w-full">
-      <div className="min-h-96 rounded-md w-full flex pb-6 gap-8">
+      <div className="min-h-96 rounded-md w-full flex flex-col pb-6 gap-8">
         <div className="flex flex-col w-full rounded-md gap-4">
           {cartItems.map((item) => {
             return (
@@ -28,10 +28,22 @@ const Cart = () => {
                 name={item.name}
                 price={item.price}
                 size={item.size}
-                setTotal={setTotal}
+                removeCartItem={removeCartItem}
+                // setTotal={setTotal}
               />
             );
           })}
+        </div>
+
+        <div className="w-full rounded-md">
+          <div className="bg-white w-2/5 rounded-md w-full">
+            <p>*content*</p>
+            {/* <p>total: {total}</p> */}
+            <Button size="lg" className="mt-6 w-full">
+              <ShoppingCart className="w-5 mr-2" />
+              BUY
+            </Button>
+          </div>
         </div>
 
         {/* <div className="w-2/5 rounded-md max-h-96 mt-7">
@@ -49,7 +61,7 @@ const Cart = () => {
   );
 };
 
-const CartItem = ({ name, price, size, setTotal }) => {
+const CartItem = ({ name, price, size, setTotal, removeCartItem }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleInputChange = (value) => {
@@ -105,8 +117,12 @@ const CartItem = ({ name, price, size, setTotal }) => {
         </form>
       </div>
       <p className="text-sm md:text-lg">${price * quantity}</p>
-      <Button size="icon" className='w-7 h-7 md:h-10 md:w-10'>
-        <Trash2 className="w-4 md:h-6 md:w-6"/>
+      <Button
+        size="icon"
+        className="w-7 h-7 md:h-10 md:w-10"
+        onClick={() => removeCartItem("React.js")}
+      >
+        <Trash2 className="w-4 md:h-6 md:w-6" />
       </Button>
     </div>
   );
