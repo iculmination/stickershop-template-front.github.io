@@ -33,6 +33,89 @@ import {
 
 import { Link } from "react-router-dom";
 
+const goodsTemporary = [
+  {
+    id: 1,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 2,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 3,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 4,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 5,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 6,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 7,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 8,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 9,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+  {
+    id: 10,
+    name: "React.js",
+    size: "6 cm x 6 cm",
+    price: 5,
+    thumbnail:
+      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+  },
+];
+
 const CatalogWithCategories = ({
   selectedCategory,
   setSelectedCategory,
@@ -74,18 +157,9 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
         </Select>
       </div>
       <div className="w-full gap-5 justify-center flex flex-wrap">
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
-        <CardElement addCartItem={addCartItem} />
+        {goodsTemporary.map((el) => {
+          return <CardElement itemData={el} addCartItem={addCartItem} />;
+        })}
       </div>
       <Pagination className="mt-8">
         <PaginationContent>
@@ -159,22 +233,22 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
   );
 };
 
-const CardElement = ({ addCartItem }) => {
+const CardElement = ({ addCartItem, itemData }) => {
   return (
-    <Card className="group w-56 cursor-pointer" key="">
+    <Card className="group w-56 cursor-pointer" key={itemData.id}>
       <Link to="/item/21673">
         <CardHeader className="flex flex-row justify-between">
           <div className="">
-            <CardTitle>React.js</CardTitle>
-            <CardDescription>6 cm x 6 cm</CardDescription>
+            <CardTitle>{itemData.name}</CardTitle>
+            <CardDescription>{itemData.size}</CardDescription>
           </div>
-          <CardTitle className="text-2xl">$5</CardTitle>
+          <CardTitle className="text-2xl">${itemData.price}</CardTitle>
         </CardHeader>
 
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img
-              src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
+              src={itemData.thumbnail}
               alt=""
               className="w-40 group-hover:scale-110 transition duration-300"
             />
@@ -183,12 +257,7 @@ const CardElement = ({ addCartItem }) => {
       </Link>
 
       <CardFooter className="flex justify-between">
-        <Button
-          className="w-full"
-          onClick={() =>
-            addCartItem({ name: "React.js", price: 5, size: "6 cm x 6 cm" })
-          }
-        >
+        <Button className="w-full" onClick={() => addCartItem(itemData)}>
           <ShoppingCart className="w-4 mr-2" />
           ADD TO CART
         </Button>

@@ -17,18 +17,34 @@ function App() {
   useEffect(() => {
     document.title = "Stickers Shop";
     setCartItems([
-      { name: "test name", price: 5, size: "test size" },
+      {
+        name: "test name",
+        price: 5,
+        size: "test size",
+        id: 999,
+        thumbnail:
+          "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+        quantity: 999,
+      },
       // COOKIE OR LOCALSTORAGE
     ]);
   }, []);
 
   const addCartItem = (newItem) => {
-    setCartItems((prevState) => [...prevState, newItem]);
+    setCartItems((prevState) => [...prevState, { ...newItem, quantity: 1 }]);
   };
 
   const removeCartItem = (itemToRemove) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => item.name !== itemToRemove)
+      prevItems.filter((item) => item.id !== itemToRemove)
+    );
+  };
+
+  const editCartItem = (id, newQuantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
     );
   };
 
@@ -64,7 +80,16 @@ function App() {
               element={<SingleGood addCartItem={addCartItem} />}
             />
             <Route path="/auth/:auth" element={<Auth />} />
-            <Route path="/cart" element={<Cart cartItems={cartItems} removeCartItem={removeCartItem}/>} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  cartItems={cartItems}
+                  removeCartItem={removeCartItem}
+                  editCartItem={editCartItem}
+                />
+              }
+            />
           </Routes>
         </div>
         <Footer />

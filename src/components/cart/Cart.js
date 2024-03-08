@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 //   { name: "React.js", price: 1, size: "6 cm x 9 cm" },
 // ];
 
-const Cart = ({ cartItems, removeCartItem }) => {
+const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
   // const [total, setTotal] = useState(0);
 
   // useEffect(()=>{setTotal(cartItems.map((el)=>{el.price}))},[])
@@ -25,10 +25,9 @@ const Cart = ({ cartItems, removeCartItem }) => {
           {cartItems.map((item) => {
             return (
               <CartItem
-                name={item.name}
-                price={item.price}
-                size={item.size}
+                itemData={item}
                 removeCartItem={removeCartItem}
+                editCartItem={editCartItem}
                 // setTotal={setTotal}
               />
             );
@@ -61,23 +60,26 @@ const Cart = ({ cartItems, removeCartItem }) => {
   );
 };
 
-const CartItem = ({ name, price, size, setTotal, removeCartItem }) => {
-  const [quantity, setQuantity] = useState(1);
-
+const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem}) => {
+  
   const handleInputChange = (value) => {
-    setQuantity((prevState) => prevState + value);
+    const newQuantity = itemData.quantity + value;
+    if (newQuantity >= 1) {
+      editCartItem(itemData.id, newQuantity);
+    }
   };
 
+
   return (
-    <div className="bg-white max-h-32 rounded-md pl-4 pr-4 lg:pl-10 lg:pr-10 pt-4 pb-4 flex justify-between items-center">
+    <div className="bg-white max-h-32 rounded-md pl-4 pr-4 lg:pl-10 lg:pr-10 pt-4 pb-4 flex justify-between items-center" key={itemData.id}>
       <img
         src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
         alt=""
         className="w-10 md:w-16"
       />
       <div className="">
-        <h2 className="font-semibold md:text-xl">{name}</h2>
-        <p className="text-gray-400 text-[10px] md:text-sm">{size}</p>
+        <h2 className="font-semibold md:text-xl">{itemData.name}</h2>
+        <p className="text-gray-400 text-[10px] md:text-sm">{itemData.size}</p>
       </div>
       <div className="">
         <form class="max-w-xs mx-auto">
@@ -101,7 +103,7 @@ const CartItem = ({ name, price, size, setTotal, removeCartItem }) => {
               data-input-counter
               class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-[12px] md:text-sm font-normal focus:outline-none focus:ring-0 max-w-6 md:max-w-10 text-center"
               placeholder=""
-              value={quantity}
+              value={itemData.quantity}
               required
             />
             <button
@@ -116,11 +118,11 @@ const CartItem = ({ name, price, size, setTotal, removeCartItem }) => {
           </div>
         </form>
       </div>
-      <p className="text-sm md:text-lg">${price * quantity}</p>
+      <p className="text-sm md:text-lg">${itemData.price * itemData.quantity}</p>
       <Button
         size="icon"
         className="w-7 h-7 md:h-10 md:w-10"
-        onClick={() => removeCartItem("React.js")}
+        onClick={() => removeCartItem(itemData.id)}
       >
         <Trash2 className="w-4 md:h-6 md:w-6" />
       </Button>
