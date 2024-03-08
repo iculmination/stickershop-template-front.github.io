@@ -19,10 +19,9 @@ const Cart = () => {
   // useEffect(()=>{setTotal(cartItems.map((el)=>{el.price}))},[])
 
   return (
-    <section className="container pt-6 pb-6 w-full">
+    <section className="container pt-8 pb-8 w-full">
       <div className="min-h-96 rounded-md w-full flex pb-6 gap-8">
-        <div className="flex flex-col w-3/5 rounded-md gap-4">
-          <Label className=" text-gray-500">Your cart:</Label>
+        <div className="flex flex-col w-full rounded-md gap-4">
           {cartItems.map((item) => {
             return (
               <CartItem
@@ -35,7 +34,7 @@ const Cart = () => {
           })}
         </div>
 
-        <div className="w-2/5 rounded-md max-h-96 mt-7">
+        {/* <div className="w-2/5 rounded-md max-h-96 mt-7">
           <div className="bg-white w-2/5 rounded-md w-full h-96">
             <p>*content*</p>
             <p>total: {total}</p>
@@ -44,7 +43,7 @@ const Cart = () => {
             <ShoppingCart className='w-5 mr-2'/>
             BUY
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -62,11 +61,11 @@ const CartItem = ({ name, price, size, setTotal }) => {
       <img
         src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
         alt=""
-        className="w-16"
+        className="w-10 md:w-16"
       />
       <div className="">
-        <h2 className="font-semibold text-xl">{name}</h2>
-        <p className="text-gray-400 text-sm">{size}</p>
+        <h2 className="font-semibold md:text-xl">{name}</h2>
+        <p className="text-gray-400 text-[10px] md:text-sm">{size}</p>
       </div>
       <div className="">
         <form class="max-w-xs mx-auto">
@@ -74,13 +73,13 @@ const CartItem = ({ name, price, size, setTotal }) => {
             for="counter-input"
             class="block mb-1 text-sm font-medium text-gray-900"
           ></label>
-          <div class="relative flex items-center">
+          <div class="flex items-center">
             <button
               type="button"
               id="decrement-button"
               onClick={() => handleInputChange(-1)}
               data-input-counter-decrement="counter-input"
-              class="text-xl flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+              class="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
             >
               -
             </button>
@@ -88,7 +87,7 @@ const CartItem = ({ name, price, size, setTotal }) => {
               type="text"
               id="counter-input"
               data-input-counter
-              class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
+              class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-[12px] md:text-sm font-normal focus:outline-none focus:ring-0 max-w-6 md:max-w-10 text-center"
               placeholder=""
               value={quantity}
               required
@@ -98,16 +97,16 @@ const CartItem = ({ name, price, size, setTotal }) => {
               id="increment-button"
               onClick={() => handleInputChange(1)}
               data-input-counter-increment="counter-input"
-              class="text-xl flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+              class="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
             >
               +
             </button>
           </div>
         </form>
       </div>
-      <p>${price * quantity}</p>
-      <Button size="icon">
-        <Trash2 />
+      <p className="text-sm md:text-lg">${price * quantity}</p>
+      <Button size="icon" className='w-7 h-7 md:h-10 md:w-10'>
+        <Trash2 className="w-4 md:h-6 md:w-6"/>
       </Button>
     </div>
   );
