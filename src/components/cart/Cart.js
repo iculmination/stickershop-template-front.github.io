@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // const cartItems = [
 //   { name: "React.js", price: 5, size: "6 cm x 6 cm" },
@@ -15,8 +16,9 @@ import { Link } from "react-router-dom";
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
   // const [total, setTotal] = useState(0);
-
   // useEffect(()=>{setTotal(cartItems.map((el)=>{el.price}))},[])
+
+
 
   return (
     <section className="container pt-8 pb-8 w-full">

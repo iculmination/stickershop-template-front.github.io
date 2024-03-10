@@ -2,7 +2,7 @@ import google from "./2702602.png";
 import facebook from "./Facebook_Logo_(2019).png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,18 +10,35 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
+import { useNavigate } from "react-router-dom";
 
-const schema = z.object({
-  login: z
-    .string()
-    .min(4, { message: "Login must contain at least 4 characters" }),
-  email: z.string().min(1, { message: "Email field cannot be empty" }),
-  password: z.string().min(1, { message: "Password field cannot be empty" }),
-});
-
-const Auth = () => {
+const Auth = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const auth = useParams();
+  const [auth, setAuth] = useState("login");
+
+  const navigate = useNavigate();
+
+  const schema =
+    auth === "register"
+      ? z.object({
+          login: z
+            .string()
+            .min(4, { message: "Login must contain at least 4 characters" }),
+          email: z.string().min(1, { message: "Email field cannot be empty" }),
+          password: z
+            .string()
+            .min(1, { message: "Password field cannot be empty" }),
+        })
+      : z.object({
+          login: z
+            .string()
+            .min(4, { message: "Login must contain at least 4 characters" }),
+
+          password: z
+            .string()
+            .min(1, { message: "Password field cannot be empty" }),
+        });
+
   const {
     register,
     handleSubmit,
@@ -31,9 +48,11 @@ const Auth = () => {
   });
   const onSubmit = async (data) => {
     console.log(data);
+    setUser(data.login);
+    navigate("/user/" + data.login);
   };
   const emailField =
-    auth.auth === "register" ? (
+    auth === "register" ? (
       <div className="mb-4">
         <Label
           htmlFor="email"
@@ -55,18 +74,24 @@ const Auth = () => {
     ) : null;
 
   const accountButton =
-    auth.auth === "login" ? (
-      <Link to="/auth/register">
-        <Button variant="ghost" className="w-full mt-4">
-          <p>I don't have an account</p>
-        </Button>
-      </Link>
+    auth === "login" ? (
+      <Button
+        variant="ghost"
+        className="w-full mt-4"
+        onClick={() => setAuth("register")}
+        type="button"
+      >
+        <p>I don't have an account</p>
+      </Button>
     ) : (
-      <Link to="/auth/login">
-        <Button variant="ghost" className="w-full mt-4">
-          <p>I already have an account</p>
-        </Button>
-      </Link>
+      <Button
+        variant="ghost"
+        className="w-full mt-4"
+        onClick={() => setAuth("login")}
+        type="button"
+      >
+        <p>I already have an account</p>
+      </Button>
     );
   return (
     <section className="container pb-12 pt-12 lg:pb-36 lg:pt-36 w-full flex flex-col justify-center items-center">
@@ -76,14 +101,14 @@ const Auth = () => {
           className="mx-auto w-full pt-8 pr-8 pl-8 focus:outline-none flex flex-col"
         >
           <h1 className="text-2xl self-center mb-4">
-            {auth.auth === "login" ? "Log in" : "Register"}
+            {auth === "login" ? "Log in" : "Register"}
           </h1>
           <div className="mb-4">
             <Label
               htmlFor="login"
               className="block text-sm font-semibold text-[#728299] ml-1"
             >
-              {auth.auth === "login" ? "Login or email" : "Login"}
+              {auth === "login" ? "Login or email" : "Login"}
             </Label>
             <Input
               maxLength="30"
@@ -132,10 +157,10 @@ const Auth = () => {
             )}
           </div>
           <Button type="submit" className="w-full mt-4">
-            <p> {auth.auth === "login" ? "Log in" : "Register"}</p>
+            <p> {auth === "login" ? "Log in" : "Register"}</p>
           </Button>
           <Label className="mt-2 font-light text-center text-[10px] font-semibold text-[#728299] ml-1">
-            By clicking on the {auth.auth === "login" ? "Log in" : "Register"}{" "}
+            By clicking on the {auth === "login" ? "Log in" : "Register"}{" "}
             button, you agree to the privacy policy
           </Label>
           <div className="flex my-4 justify-center items-center">
@@ -145,11 +170,11 @@ const Auth = () => {
           </div>
           <Button variant="outline" className="w-full" type="button">
             <img src={google} alt="" className="w-5 mr-2" />
-            <p>{auth.auth === "login" ? "Log in" : "Register"} with Google</p>
+            <p>{auth === "login" ? "Log in" : "Register"} with Google</p>
           </Button>
           <Button variant="outline" className="w-full mt-4" type="button">
             <img src={facebook} alt="" className="w-5 mr-2" />
-            <p>{auth.auth === "login" ? "Log in" : "Register"} with Facebook</p>
+            <p>{auth === "login" ? "Log in" : "Register"} with Facebook</p>
           </Button>
           {accountButton}
         </form>

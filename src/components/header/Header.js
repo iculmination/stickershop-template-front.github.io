@@ -21,7 +21,7 @@ import {
 } from "../ui/sheet";
 import { set } from "react-hook-form";
 
-const Header = ({ setSelectedCategory }) => {
+const Header = ({ setSelectedCategory, userId }) => {
   return (
     <header className="bg-white w-full drop-shadow-md">
       <div className="container bg-white h-24 w-full flex justify-between items-center">
@@ -34,7 +34,7 @@ const Header = ({ setSelectedCategory }) => {
         </Link>
         <div className="flex w-full items-center max-w-xl space-x-2 ml-12 mr-8">
           <Input type="email" placeholder="Search" className="w-full" />
-          <Button type="submit" size="icon" className='w-12'>
+          <Button type="submit" size="icon" className="w-12">
             <Search className="w-5" />
           </Button>
         </div>
@@ -57,7 +57,7 @@ const Header = ({ setSelectedCategory }) => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to="/auth/login">
+                <Link to={"/user/" + userId}>
                   <NavigationMenuLink>
                     <Button variant="ghost" size="icon">
                       <UserRound className="w-5" />
@@ -112,7 +112,7 @@ const Header = ({ setSelectedCategory }) => {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/auth/login">
+                  <Link to={"/user/" + userId}>
                     <NavigationMenuLink>
                       <SheetClose asChild>
                         <Button variant="ghost" size="icon">

@@ -9,10 +9,12 @@ import SingleGood from "./components/singleGood/SingleGood";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./components/auth/Auth";
 import Cart from "./components/cart/Cart";
+import User from "./components/user/User";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
   const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     document.title = "Stickers Shop";
@@ -57,7 +59,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header setSelectedCategory={setSelectedCategory} />
+        <Header setSelectedCategory={setSelectedCategory} userId={user} />
         <div className=" bg-violet-100 w-full min-h-screen">
           <Routes>
             <Route
@@ -85,7 +87,7 @@ function App() {
               path="/item/:itemId"
               element={<SingleGood addCartItem={addCartItem} />}
             />
-            <Route path="/auth/:auth" element={<Auth />} />
+            <Route path="/auth" element={<Auth setUser={setUser}/>} />
             <Route
               path="/cart"
               element={
@@ -95,6 +97,10 @@ function App() {
                   editCartItem={editCartItem}
                 />
               }
+            />
+            <Route
+              path="/user/:userIdParams"
+              element={<User userId={user} />}
             />
           </Routes>
         </div>
