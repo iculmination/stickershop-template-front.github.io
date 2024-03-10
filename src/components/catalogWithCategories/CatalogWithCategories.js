@@ -158,7 +158,9 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
       </div>
       <div className="w-full gap-5 justify-center flex flex-wrap">
         {goodsTemporary.map((el) => {
-          return <CardElement itemData={el} addCartItem={addCartItem} />;
+          return (
+            <CardElement itemData={el} addCartItem={addCartItem} key={el.id} />
+          );
         })}
       </div>
       <Pagination className="mt-8">
@@ -223,6 +225,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
+              key={el.id}
             >
               {i === 0 ? "Popular" : "Category " + i}
             </Button>
@@ -235,7 +238,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 
 const CardElement = ({ addCartItem, itemData }) => {
   return (
-    <Card className="group w-56 cursor-pointer" key={itemData.id}>
+    <Card className="group w-56 cursor-pointer">
       <Link to={"/item/" + itemData.id}>
         <CardHeader className="flex flex-row justify-between">
           <div className="">

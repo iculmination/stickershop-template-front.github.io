@@ -1,7 +1,5 @@
 import { ShoppingCart, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
@@ -15,11 +13,12 @@ import { Link } from "react-router-dom";
 // ];
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
-  // const [total, setTotal] = useState(0);
-  // useEffect(()=>{setTotal(cartItems.map((el)=>{el.price}))},[])
-
-
-
+  let total = 0;
+  let totalItems = 0;
+  cartItems.map((item) => {
+    total += item.quantity * item.price;
+    totalItems += item.quantity;
+  });
   return (
     <section className="container pt-8 pb-8 w-full">
       <div className="min-h-96 rounded-md w-full flex flex-col pb-6 gap-8">
@@ -30,21 +29,24 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
                 itemData={item}
                 removeCartItem={removeCartItem}
                 editCartItem={editCartItem}
-                // setTotal={setTotal}
+                key={item.id}
               />
             );
           })}
         </div>
 
-        <div className="w-full rounded-md">
-          <div className="bg-white w-2/5 rounded-md w-full">
-            <p>*content*</p>
-            {/* <p>total: {total}</p> */}
-            <Button size="lg" className="mt-6 w-full">
-              <ShoppingCart className="w-5 mr-2" />
-              BUY
-            </Button>
-          </div>
+        <div className="w-full md:w-1/2 lg:w-1/3 mx-auto bg-white rounded-md p-4">
+          <p className="font-semibold md:text-xl text-center mx-auto">
+            Total: ${total}{" "}
+            <p className="text-gray-400 font-normal text-[12px] md:text-sm">
+              ({totalItems} items, {cartItems.length} different)
+            </p>
+          </p>
+          {/* <p>total: {total}</p> */}
+          <Button size="lg" className="mt-6 w-full">
+            <ShoppingCart className="w-5 mr-2" />
+            BUY
+          </Button>
         </div>
 
         {/* <div className="w-2/5 rounded-md max-h-96 mt-7">
@@ -91,36 +93,37 @@ const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
         </div>
       </Link>
       <div className="">
-        <form class="max-w-xs mx-auto">
+        <form className="max-w-xs mx-auto">
           <label
-            for="counter-input"
-            class="block mb-1 text-sm font-medium text-gray-900"
+            htmlFor="counter-input"
+            className="block mb-1 text-sm font-medium text-gray-900"
           ></label>
-          <div class="flex items-center">
+          <div className="flex items-center">
             <button
               type="button"
               id="decrement-button"
               onClick={() => handleInputChange(-1)}
               data-input-counter-decrement="counter-input"
-              class="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+              className="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
             >
               -
             </button>
-            <Input
+            <input
               type="text"
               id="counter-input"
               data-input-counter
-              class="flex-shrink-0 text-gray-900 border-0 bg-transparent text-[12px] md:text-sm font-normal focus:outline-none focus:ring-0 max-w-6 md:max-w-10 text-center"
+              className="flex-shrink-0 text-gray-900 border-0 bg-transparent text-[12px] md:text-sm font-normal focus:outline-none focus:ring-0 max-w-6 md:max-w-10 text-center"
               placeholder=""
               value={itemData.quantity}
               required
+              readOnly
             />
             <button
               type="button"
               id="increment-button"
               onClick={() => handleInputChange(1)}
               data-input-counter-increment="counter-input"
-              class="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+              className="text-sm md:text-xl flex-shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md w-4 h-4 md:h-5 md:w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
             >
               +
             </button>

@@ -124,7 +124,10 @@ const HomeWithNew = ({ addCartItem }) => {
             <CarouselContent>
               {goodsTemporary.map((el) => {
                 return (
-                  <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem
+                    className="md:basis-1/2 lg:basis-1/3"
+                    key={el.id}
+                  >
                     <CardElement itemData={el} addCartItem={addCartItem} />
                   </CarouselItem>
                 );

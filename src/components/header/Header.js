@@ -21,7 +21,7 @@ import {
 } from "../ui/sheet";
 import { set } from "react-hook-form";
 
-const Header = ({ setSelectedCategory, userId }) => {
+const Header = ({ setSelectedCategory, user }) => {
   return (
     <header className="bg-white w-full drop-shadow-md">
       <div className="container bg-white h-24 w-full flex justify-between items-center">
@@ -43,36 +43,30 @@ const Header = ({ setSelectedCategory, userId }) => {
             <NavigationMenuList className="flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row">
               <NavigationMenuItem>
                 <Link to="/catalog">
-                  <NavigationMenuLink>
-                    <Button
-                      variant="ghost"
-                      size=""
-                      type="submit"
-                      onClick={() => setSelectedCategory("Popular")}
-                    >
-                      Catalog
-                    </Button>
-                  </NavigationMenuLink>
+                  <Button
+                    variant="ghost"
+                    size=""
+                    type="submit"
+                    onClick={() => setSelectedCategory("Popular")}
+                  >
+                    Catalog
+                  </Button>
                 </Link>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to={"/user/" + userId}>
-                  <NavigationMenuLink>
-                    <Button variant="ghost" size="icon">
-                      <UserRound className="w-5" />
-                    </Button>
-                  </NavigationMenuLink>
+                <Link to={"/user/" + user.login}>
+                  <Button variant="ghost" size="icon">
+                    <UserRound className="w-5" />
+                  </Button>
                 </Link>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <Link to="/cart">
-                  <NavigationMenuLink>
-                    <Button variant="ghost" size="icon">
-                      <ShoppingCart className="w-5" />
-                    </Button>
-                  </NavigationMenuLink>
+                  <Button variant="ghost" size="icon">
+                    <ShoppingCart className="w-5" />
+                  </Button>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -85,7 +79,7 @@ const Header = ({ setSelectedCategory, userId }) => {
               <Menu className="" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right">
+          <SheetContent side="right" className="">
             <SheetHeader>
               <SheetTitle>Stickers Shop</SheetTitle>
               <SheetDescription>
@@ -93,11 +87,11 @@ const Header = ({ setSelectedCategory, userId }) => {
               </SheetDescription>
             </SheetHeader>
 
-            <NavigationMenu className="">
-              <NavigationMenuList className="flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row">
-                <NavigationMenuItem>
-                  <Link to="/catalog">
-                    <NavigationMenuLink>
+            <div className="w-full justify-center items-center">
+              <NavigationMenu className="w-full">
+                <NavigationMenuList className="w-full justify-center items-center flex flex-col mt-4 mb-4 md:mt-0 md:mb-0 md:flex-row mx-auto">
+                  <NavigationMenuItem className="mx-auto self-center w-full">
+                    <Link to="/catalog">
                       <SheetClose asChild>
                         <Button
                           variant="ghost"
@@ -108,33 +102,25 @@ const Header = ({ setSelectedCategory, userId }) => {
                           Catalog
                         </Button>
                       </SheetClose>
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to={"/user/" + userId}>
-                    <NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link to={"/user/" + user.login}>
                       <SheetClose asChild>
-                        <Button variant="ghost" size="icon">
-                          <UserRound className="w-5" />
-                        </Button>
+                        <Button variant="ghost">Profile</Button>
                       </SheetClose>
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/cart">
-                    <NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link to="/cart">
                       <SheetClose asChild>
-                        <Button variant="ghost" size="icon">
-                          <ShoppingCart className="w-5" />
-                        </Button>
+                        <Button variant="ghost">Cart</Button>
                       </SheetClose>
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
 
             <SheetFooter>
               <SheetClose asChild>

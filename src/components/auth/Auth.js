@@ -48,7 +48,7 @@ const Auth = ({ setUser }) => {
   });
   const onSubmit = async (data) => {
     console.log(data);
-    setUser(data.login);
+    setUser(data);
     navigate("/user/" + data.login);
   };
   const emailField =

@@ -14,7 +14,7 @@ import User from "./components/user/User";
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
   const [cartItems, setCartItems] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({login: 'emptyUser'});
 
   useEffect(() => {
     document.title = "Stickers Shop";
@@ -59,7 +59,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header setSelectedCategory={setSelectedCategory} userId={user} />
+        <Header setSelectedCategory={setSelectedCategory} user={user} />
         <div className=" bg-violet-100 w-full min-h-screen">
           <Routes>
             <Route
@@ -87,7 +87,7 @@ function App() {
               path="/item/:itemId"
               element={<SingleGood addCartItem={addCartItem} />}
             />
-            <Route path="/auth" element={<Auth setUser={setUser}/>} />
+            <Route path="/auth" element={<Auth setUser={setUser} />} />
             <Route
               path="/cart"
               element={
@@ -100,7 +100,7 @@ function App() {
             />
             <Route
               path="/user/:userIdParams"
-              element={<User userId={user} />}
+              element={<User user={user} />}
             />
           </Routes>
         </div>
