@@ -33,88 +33,6 @@ import {
 
 import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
-// const goodsTemporary = [
-//   {
-//     id: 1,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 2,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 3,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 4,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 5,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 6,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 7,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 8,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 9,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-//   {
-//     id: 10,
-//     name: "React.js",
-//     size: "6 cm x 6 cm",
-//     price: 5,
-//     thumbnail:
-//       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-//   },
-// ];
 
 const CatalogWithCategories = ({
   selectedCategory,
@@ -135,8 +53,11 @@ const CatalogWithCategories = ({
 const Catalog = ({ selectedCategory, addCartItem }) => {
   // const [sort, setSort] = useState("top");
   const [stickers, setStickers] = useState([]);
-  
-  useEffect(()=>{},[])
+  const { loading, error, getAllStickers } = useStickersApi();
+
+  useEffect(() => {
+    getAllStickers().then(setStickers);
+  }, []);
 
   return (
     <div className="bg-white w-full rounded-md p-6 drop-shadow">
