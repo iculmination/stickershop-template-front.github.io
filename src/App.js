@@ -36,7 +36,6 @@ function App() {
 
   const addCartItem = (newItem) => {
     const existingItem = cartItems.find((item) => item.id === newItem.id);
-
     if (existingItem) {
       editCartItem(existingItem.id, existingItem.quantity + 1);
     } else {

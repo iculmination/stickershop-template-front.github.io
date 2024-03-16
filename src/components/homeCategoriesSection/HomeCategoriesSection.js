@@ -11,61 +11,61 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory1")}
+            onClick={() => setSelectedCategory("Animals")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 1
+              Animals
             </h2>
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory2")}
+            onClick={() => setSelectedCategory("Food")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 2
+              Food
             </h2>
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory3")}
+            onClick={() => setSelectedCategory("Money")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md md:col-span-2 lg:col-span-1 lg:row-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 3
+              Money
             </h2>
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory4")}
+            onClick={() => setSelectedCategory("Programming")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md lg:col-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 4
+              Programming
             </h2>
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory5")}
+            onClick={() => setSelectedCategory("Videogames")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 5
+              Videogames
             </h2>
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("exampleCategory6")}
+            onClick={() => setSelectedCategory("Music")}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md md:col-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
-              Stickers category 6
+              Music
             </h2>
           </Link>
         </div>
         <Button className="w-2/4 self-center" size="lg">
-          To catalog
+          More categories
         </Button>
       </div>
     </section>

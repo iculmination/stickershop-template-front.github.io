@@ -56,7 +56,7 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
-    getAllStickers().then(setStickers);
+    getAllStickers().then(setStickers).catch();
   }, []);
 
   return (
@@ -116,13 +116,13 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
 };
 
 const categories = [
-  { id: "Popular" },
-  { id: "exampleCategory1" },
-  { id: "exampleCategory2" },
-  { id: "exampleCategory3" },
-  { id: "exampleCategory4" },
-  { id: "exampleCategory5" },
-  { id: "exampleCategory6" },
+  { name: "Popular" },
+  { name: "Animals" },
+  { name: "Food" },
+  { name: "Money" },
+  { name: "Programming" },
+  { name: "Videogames" },
+  { name: "Music" },
 ];
 
 const Categories = ({ selectedCategory, setSelectedCategory }) => {
@@ -138,20 +138,20 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
     <div className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow">
       <h2 className="text-xl">Categories</h2>
       <div className="w-full bg-violet-50 p-4 flex flex-col justify-start items-start mt-6 rounded-md text-md min-h-80">
-        {categories.map((el, i) => {
+        {categories.map((el) => {
           const buttonClassName =
-            selectedCategory === el.id
+            selectedCategory === el.name
               ? "focus:outline-none bg-white text-black p-4 pl-4 w-full transition duration-300"
               : "text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-4 pl-4 w-full";
           return (
             <Button
-              onClick={() => setSelectedCategory(el.id)}
+              onClick={() => setSelectedCategory(el.name)}
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
-              key={el.id}
+              key={el.name}
             >
-              {i === 0 ? "Popular" : "Category " + i}
+              {el.name}
             </Button>
           );
         })}

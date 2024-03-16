@@ -11,6 +11,11 @@ const useStickersApi = () => {
     return res.map((sticker) => transformSticker(sticker));
   };
 
+  const getStickerById = async (id) => {
+    const res = await request(`${_apiBase}/Stickers/${id}`);
+    return transformSticker(res);
+  };
+
   const transformSticker = (sticker) => {
     return {
       id: sticker.stickerId,
@@ -22,10 +27,11 @@ const useStickersApi = () => {
       colors: sticker.stickerColors,
       materials: sticker.stickerMaterials,
       description: sticker.stickerDescription,
+      inStock: sticker.stickerInStock,
     };
   };
 
-  return { loading, error, getAllStickers };
+  return { loading, error, getAllStickers, getStickerById };
 };
 
 export default useStickersApi;

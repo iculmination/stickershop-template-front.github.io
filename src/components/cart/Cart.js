@@ -48,23 +48,12 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
             BUY
           </Button>
         </div>
-
-        {/* <div className="w-2/5 rounded-md max-h-96 mt-7">
-          <div className="bg-white w-2/5 rounded-md w-full h-96">
-            <p>*content*</p>
-            <p>total: {total}</p>
-          </div>
-          <Button size="lg" className="mt-6 w-full">
-            <ShoppingCart className='w-5 mr-2'/>
-            BUY
-          </Button>
-        </div> */}
       </div>
     </section>
   );
 };
 
-const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
+const CartItem = ({ itemData, removeCartItem, editCartItem }) => {
   const handleInputChange = (value) => {
     const newQuantity = itemData.quantity + value;
     if (newQuantity >= 1) {
@@ -78,14 +67,10 @@ const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
       key={itemData.id}
     >
       <Link to={"/item/" + itemData.id}>
-        <img
-          src="https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png"
-          alt=""
-          className="w-10 md:w-16"
-        />
+        <img src={itemData.thumbnail} alt="" className="w-10 md:w-16" />
       </Link>
       <Link to={"/item/" + itemData.id}>
-        <div className="">
+        <div className="w-32 md:w-52 xl:w-72">
           <h2 className="font-semibold md:text-xl">{itemData.name}</h2>
           <p className="text-gray-400 text-[10px] md:text-sm">
             {itemData.size}
@@ -98,7 +83,7 @@ const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
             htmlFor="counter-input"
             className="block mb-1 text-sm font-medium text-gray-900"
           ></label>
-          <div className="flex items-center">
+          <div className="flex items-center w-14">
             <button
               type="button"
               id="decrement-button"
@@ -130,7 +115,7 @@ const CartItem = ({ itemData, setTotal, removeCartItem, editCartItem }) => {
           </div>
         </form>
       </div>
-      <p className="text-sm md:text-lg">
+      <p className="text-sm md:text-lg w-6 text-left">
         ${itemData.price * itemData.quantity}
       </p>
       <Button
