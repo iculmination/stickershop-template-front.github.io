@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
-import { ShoppingCart } from "lucide-react";
 import { Badge } from "../ui/badge";
+import CustomToast from "../customToast/CustomToast";
 import {
   Card,
   CardContent,
@@ -19,123 +19,60 @@ import {
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
-
-const goodsTemporary = [
-  {
-    id: 191,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 192,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 193,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 194,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 195,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 196,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 197,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 198,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 199,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-  {
-    id: 1190,
-    name: "React.js",
-    size: "6 cm x 6 cm",
-    price: 5,
-    thumbnail:
-      "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-  },
-];
+import useStickersApi from "../stickers/StickersApi";
+import { useState, useEffect } from "react";
+import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
 
 const HomeWithNew = ({ addCartItem }) => {
+  const [stickers, setStickers] = useState([]);
+  const { loading, error, getAllStickers } = useStickersApi();
+
+  useEffect(() => {
+    getAllStickers().then(setStickers).catch();
+  }, []);
+
+  const spinner = loading ? (
+    <img alt="loading..." src={spinnerSvg} className="mx-auto" />
+  ) : null;
+  const errorMessage = error ? (
+    <img
+      alt="error"
+      src="https://st.depositphotos.com/1006899/2650/i/450/depositphotos_26505551-stock-photo-error-metaphor.jpg"
+    />
+  ) : null;
+  const content =
+    loading || error ? null : (
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+        className="w-4/5"
+        plugins={[
+          Autoplay({
+            delay: 4000,
+          }),
+        ]}
+      >
+        <CarouselContent>
+          {stickers.map((el) => {
+            return (
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={el.id}>
+                <CardElement itemData={el} addCartItem={addCartItem} />
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    );
+
   return (
     <section className="container pb-6 w-full">
       <div className="bg-white min-h-96 rounded-md w-full flex flex-col justify-center pb-6">
         <h1 className="text-4xl pl-10 pt-8 text-[#728299]">New</h1>
         <div className="p-10 w-full gap-4 lg:gap-6 justify-center flex flex-wrap">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className="w-4/5"
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-          >
-            {/* md:basis-1/2 lg:basis-1/3 */}
-            <CarouselContent>
-              {goodsTemporary.map((el) => {
-                return (
-                  <CarouselItem
-                    className="md:basis-1/2 lg:basis-1/3"
-                    key={el.id}
-                  >
-                    <CardElement itemData={el} addCartItem={addCartItem} />
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          {spinner} {errorMessage} {content}
         </div>
         <Button className="w-1/2 self-center" size="lg">
           To catalog
@@ -173,10 +110,15 @@ const CardElement = ({ addCartItem, itemData }) => {
       </Link>
 
       <CardFooter className="flex justify-between">
-        <Button className="w-full" onClick={() => addCartItem(itemData)}>
-          <ShoppingCart className="w-4 mr-2" />
-          ADD TO CART
-        </Button>
+        <CustomToast
+          addCartItem={addCartItem}
+          sticker={itemData}
+          description={`You have successfully added ${itemData.name} to your cart`}
+          message="Item added"
+          buttonName="ADD TO CART"
+          cartIcon={true}
+          classNames="w-full"
+        />
       </CardFooter>
     </Card>
   );

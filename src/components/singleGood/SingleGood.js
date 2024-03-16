@@ -41,9 +41,11 @@ const SingleGood = ({ addCartItem }) => {
         <div className="mt-6">
           <h1 className="text-3xl font-semibold mb-2 flex">
             {sticker.name}
-            <Badge variant="" className="mt-1 mb-1 ml-2">
-              NEW
-            </Badge>
+            {sticker.isNew ? (
+              <Badge variant="" className="mt-1 mb-1 ml-2">
+                NEW
+              </Badge>
+            ) : null}
           </h1>
           <p className="text-gray-600 mb-4">Size: {sticker.size}</p>
           <h2 className="text-2xl font-semibold mb-4">${sticker.price}</h2>

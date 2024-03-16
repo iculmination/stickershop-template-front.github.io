@@ -28,6 +28,8 @@ const useStickersApi = () => {
       materials: sticker.stickerMaterials,
       description: sticker.stickerDescription,
       inStock: sticker.stickerInStock,
+      isNew: sticker.stickerNew,
+      discount: sticker.stickerDiscount,
     };
   };
 

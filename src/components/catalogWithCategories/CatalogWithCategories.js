@@ -34,6 +34,7 @@ import {
 import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
+import { Badge } from "../ui/badge";
 
 const CatalogWithCategories = ({
   selectedCategory,
@@ -192,6 +193,11 @@ const CardElement = ({ addCartItem, itemData }) => {
           <div className="">
             <CardTitle>{itemData.name}</CardTitle>
             <CardDescription>{itemData.size}</CardDescription>
+            {itemData.isNew ? (
+              <Badge variant="" className="mt-1 absolute">
+                NEW
+              </Badge>
+            ) : null}
           </div>
           <CardTitle className="text-2xl">${itemData.price}</CardTitle>
         </CardHeader>
