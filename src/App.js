@@ -11,25 +11,27 @@ import Auth from "./components/auth/Auth";
 import Cart from "./components/cart/Cart";
 import User from "./components/user/User";
 
+import StickersApi from "./components/stickers/StickersApi";
+
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("Popular");
   const [cartItems, setCartItems] = useState([]);
-  const [user, setUser] = useState({login: 'emptyUser'});
+  const [user, setUser] = useState({ login: "emptyUser" });
 
   useEffect(() => {
     document.title = "Stickers Shop";
-    setCartItems([
-      {
-        name: "test name",
-        price: 5,
-        size: "test size",
-        id: 999,
-        thumbnail:
-          "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
-        quantity: 999,
-      },
-      // COOKIE OR LOCALSTORAGE
-    ]);
+    // setCartItems([
+    //   {
+    //     name: "test name",
+    //     price: 5,
+    //     size: "test size",
+    //     id: 999,
+    //     thumbnail:
+    //       "https://rat.in.ua/wp-content/uploads/2015/12/5525-React.js-200x200.png",
+    //     quantity: 999,
+    //   },
+    //   // COOKIE OR LOCALSTORAGE
+    // ]);
   }, []);
 
   const addCartItem = (newItem) => {
@@ -98,10 +100,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/user/:userIdParams"
-              element={<User user={user} />}
-            />
+            <Route path="/user/:userIdParams" element={<User user={user} />} />
           </Routes>
         </div>
         <Footer />
