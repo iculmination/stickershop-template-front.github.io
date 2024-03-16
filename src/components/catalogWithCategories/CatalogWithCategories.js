@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ShoppingCart } from "lucide-react";
+import CustomToast from "../customToast/CustomToast";
 import { Button } from "../ui/button";
 import { Label } from "@radix-ui/react-label";
 import {
@@ -33,6 +33,7 @@ import {
 
 import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
+import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
 
 const CatalogWithCategories = ({
   selectedCategory,
@@ -59,6 +60,57 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
     getAllStickers().then(setStickers).catch();
   }, []);
 
+  const spinner = loading ? (
+    <img alt="loading..." src={spinnerSvg} className="mx-auto" />
+  ) : null;
+  const errorMessage = error ? (
+    <img
+      alt="error"
+      src="https://st.depositphotos.com/1006899/2650/i/450/depositphotos_26505551-stock-photo-error-metaphor.jpg"
+    />
+  ) : null;
+  const content =
+    loading || error ? null : (
+      <>
+        <div className="w-full gap-5 justify-center flex flex-wrap">
+          {stickers.map((el) => {
+            return (
+              <CardElement
+                itemData={el}
+                addCartItem={addCartItem}
+                key={el.id}
+              />
+            );
+          })}
+        </div>
+
+        <Pagination className="mt-8">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" isActive>
+                1
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </>
+    );
+
   return (
     <div className="bg-white w-full rounded-md p-6 drop-shadow">
       <div className="mb-6 flex w-full justify-between pl-6 pr-6">
@@ -80,37 +132,9 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
           </SelectContent>
         </Select>
       </div>
-      <div className="w-full gap-5 justify-center flex flex-wrap">
-        {stickers.map((el) => {
-          return (
-            <CardElement itemData={el} addCartItem={addCartItem} key={el.id} />
-          );
-        })}
-      </div>
-      <Pagination className="mt-8">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {spinner}
+      {errorMessage}
+      {content}
     </div>
   );
 };
@@ -184,10 +208,15 @@ const CardElement = ({ addCartItem, itemData }) => {
       </Link>
 
       <CardFooter className="flex justify-between">
-        <Button className="w-full" onClick={() => addCartItem(itemData)}>
-          <ShoppingCart className="w-4 mr-2" />
-          ADD TO CART
-        </Button>
+        <CustomToast
+          addCartItem={addCartItem}
+          sticker={itemData}
+          description={`You have successfully added ${itemData.name} to your cart`}
+          message="Item added"
+          buttonName="ADD TO CART"
+          cartIcon={true}
+          classNames="w-full"
+        />
       </CardFooter>
     </Card>
   );

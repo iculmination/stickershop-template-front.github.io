@@ -63,7 +63,7 @@ const CartItem = ({ itemData, removeCartItem, editCartItem }) => {
 
   return (
     <div
-      className="bg-white max-h-32 rounded-md pl-4 pr-4 lg:pl-10 lg:pr-10 pt-4 pb-4 flex justify-between items-center"
+      className="bg-white max-h-32 rounded-md -mx-6 px-4 lg:pl-10 lg:pr-10 pt-4 pb-4 flex justify-between items-center"
       key={itemData.id}
     >
       <Link to={"/item/" + itemData.id}>
@@ -115,7 +115,7 @@ const CartItem = ({ itemData, removeCartItem, editCartItem }) => {
           </div>
         </form>
       </div>
-      <p className="text-sm md:text-lg w-6 text-left">
+      <p className="text-sm md:text-lg w-8   text-left">
         ${itemData.price * itemData.quantity}
       </p>
       <Button
