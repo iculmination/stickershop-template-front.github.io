@@ -47,7 +47,7 @@ const Auth = ({ setUser }) => {
     resolver: zodResolver(schema),
   });
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     setUser(data);
     navigate("/user/" + data.login);
   };
