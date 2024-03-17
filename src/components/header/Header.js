@@ -2,13 +2,11 @@ import { UserRound, Search, ShoppingCart, Menu } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "../ui/navigation-menu";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
-import { Label } from "../ui/label";
 import {
   Sheet,
   SheetClose,
@@ -19,7 +17,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { set } from "react-hook-form";
 
 const Header = ({ setSelectedCategory, user }) => {
   return (
@@ -47,7 +44,7 @@ const Header = ({ setSelectedCategory, user }) => {
                     variant="ghost"
                     size=""
                     type="submit"
-                    onClick={() => setSelectedCategory("Popular")}
+                    // onClick={() => setSelectedCategory("Popular")}
                   >
                     Catalog
                   </Button>
@@ -97,7 +94,7 @@ const Header = ({ setSelectedCategory, user }) => {
                           variant="ghost"
                           size=""
                           type="submit"
-                          onClick={() => setSelectedCategory("Popular")}
+                          // onClick={() => setSelectedCategory("Popular")}
                         >
                           Catalog
                         </Button>

@@ -169,18 +169,18 @@ const categories = [
 ];
 
 const colors = [
-  { name: "any" },
-  { name: "red" },
-  { name: "blue" },
-  { name: "sky" },
-  { name: "yellow" },
-  { name: "orange" },
-  { name: "green" },
-  { name: "brown" },
-  { name: "white" },
-  { name: "black" },
-  { name: "gray" },
-  { name: "violet" },
+  { name: "any", HEX: "" },
+  { name: "red", HEX: "#ff0000" },
+  { name: "blue", HEX: "#8ccef5" },
+  { name: "sky", HEX: "#4287f5" },
+  { name: "yellow", HEX: "#ebe426" },
+  { name: "orange", HEX: "#f2b633" },
+  { name: "green", HEX: "#34f01f" },
+  { name: "brown", HEX: "#734518" },
+  { name: "white", HEX: "#ffffff" },
+  { name: "black", HEX: "#000000" },
+  { name: "gray", HEX: "#7d7d7d" },
+  { name: "violet", HEX: "#9f1be0" },
 ];
 
 const Categories = ({
@@ -222,7 +222,7 @@ const Categories = ({
       <h2 className="text-xl mt-6 text-center">Colors</h2>
       <div className="w-full bg-violet-50 p-4 flex justify-between items-start flex-wrap mt-6 rounded-md text-md min-h-80">
         {colors.map((el) => {
-          const colorClassName = `rounded-full bg-${el.name}-800 w-full h-full`;
+          const hexClassName = "rounded-full w-full h-full bg-[" + el.HEX + "]";
           const buttonClassName =
             selectedColor === el.name
               ? "size-14 focus:outline-none bg-white p-3 transition duration-300"
@@ -235,7 +235,7 @@ const Categories = ({
               className={buttonClassName}
               key={el.name}
             >
-              <div className={colorClassName}></div>
+              <div className={hexClassName}>{el.HEX}</div>
             </Button>
           );
         })}
