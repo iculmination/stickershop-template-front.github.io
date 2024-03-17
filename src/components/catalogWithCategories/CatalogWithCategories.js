@@ -40,12 +40,16 @@ const CatalogWithCategories = ({
   selectedCategory,
   setSelectedCategory,
   addCartItem,
+  selectedColor,
+  setSelectedColor,
 }) => {
   return (
     <section className="container w-full flex gap-6 pt-6 pb-6">
       <Categories
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
       />
       <Catalog selectedCategory={selectedCategory} addCartItem={addCartItem} />
     </section>
@@ -58,8 +62,12 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
-    getAllStickers().then(setStickers).catch();
-  }, []);
+    const parameters =
+      selectedCategory === "All"
+        ? ""
+        : `category=${selectedCategory.toLowerCase()}`;
+    getAllStickers([parameters]).then(setStickers).catch();
+  }, [selectedCategory]);
 
   const spinner = loading ? (
     <img alt="loading..." src={spinnerSvg} className="mx-auto" />
@@ -68,10 +76,15 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
     <img
       alt="error"
       src="https://st.depositphotos.com/1006899/2650/i/450/depositphotos_26505551-stock-photo-error-metaphor.jpg"
+      className="mx-auto"
     />
   ) : null;
   const content =
-    loading || error ? null : (
+    loading || error ? null : stickers?.length === 0 ? (
+      <p className="text-center my-24 text-red-500">
+        No stickers found in this category.
+      </p>
+    ) : (
       <>
         <div className="w-full gap-5 justify-center flex flex-wrap">
           {stickers.map((el) => {
@@ -141,6 +154,7 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
 };
 
 const categories = [
+  { name: "All" },
   { name: "Popular" },
   { name: "Animals" },
   { name: "Food" },
@@ -148,9 +162,33 @@ const categories = [
   { name: "Programming" },
   { name: "Videogames" },
   { name: "Music" },
+  { name: "Movies" },
+  { name: "Sport" },
+  { name: "Memes" },
+  { name: "Cars" },
 ];
 
-const Categories = ({ selectedCategory, setSelectedCategory }) => {
+const colors = [
+  { name: "any" },
+  { name: "red" },
+  { name: "blue" },
+  { name: "sky" },
+  { name: "yellow" },
+  { name: "orange" },
+  { name: "green" },
+  { name: "brown" },
+  { name: "white" },
+  { name: "black" },
+  { name: "gray" },
+  { name: "violet" },
+];
+
+const Categories = ({
+  selectedCategory,
+  setSelectedCategory,
+  selectedColor,
+  setSelectedColor,
+}) => {
   const buttonRef = useRef(null);
 
   useEffect(() => {
@@ -161,7 +199,7 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
 
   return (
     <div className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow">
-      <h2 className="text-xl">Categories</h2>
+      <h2 className="text-xl text-center">Categories</h2>
       <div className="w-full bg-violet-50 p-4 flex flex-col justify-start items-start mt-6 rounded-md text-md min-h-80">
         {categories.map((el) => {
           const buttonClassName =
@@ -177,6 +215,27 @@ const Categories = ({ selectedCategory, setSelectedCategory }) => {
               key={el.name}
             >
               {el.name}
+            </Button>
+          );
+        })}
+      </div>
+      <h2 className="text-xl mt-6 text-center">Colors</h2>
+      <div className="w-full bg-violet-50 p-4 flex justify-between items-start flex-wrap mt-6 rounded-md text-md min-h-80">
+        {colors.map((el) => {
+          const colorClassName = `rounded-full bg-${el.name}-800 w-full h-full`;
+          const buttonClassName =
+            selectedColor === el.name
+              ? "size-14 focus:outline-none bg-white p-3 transition duration-300"
+              : "size-14 text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-3";
+          return (
+            <Button
+              onClick={() => setSelectedColor(el.name)}
+              variant="ghost"
+              ref={buttonRef}
+              className={buttonClassName}
+              key={el.name}
+            >
+              <div className={colorClassName}></div>
             </Button>
           );
         })}

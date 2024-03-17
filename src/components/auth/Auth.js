@@ -2,7 +2,6 @@ import google from "./2702602.png";
 import facebook from "./Facebook_Logo_(2019).png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

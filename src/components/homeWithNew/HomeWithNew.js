@@ -28,7 +28,7 @@ const HomeWithNew = ({ addCartItem }) => {
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
-    getAllStickers().then(setStickers).catch();
+    getAllStickers(["new"]).then(setStickers).catch();
   }, []);
 
   const spinner = loading ? (
@@ -38,6 +38,7 @@ const HomeWithNew = ({ addCartItem }) => {
     <img
       alt="error"
       src="https://st.depositphotos.com/1006899/2650/i/450/depositphotos_26505551-stock-photo-error-metaphor.jpg"
+      className="mx-auto"
     />
   ) : null;
   const content =
@@ -74,9 +75,11 @@ const HomeWithNew = ({ addCartItem }) => {
         <div className="p-10 w-full gap-4 lg:gap-6 justify-center flex flex-wrap">
           {spinner} {errorMessage} {content}
         </div>
-        <Button className="w-1/2 self-center" size="lg">
-          To catalog
-        </Button>
+        <Link to="/catalog" className="w-1/2 self-center">
+          <Button className="w-full" size="lg">
+            To catalog
+          </Button>
+        </Link>
       </div>
     </section>
   );

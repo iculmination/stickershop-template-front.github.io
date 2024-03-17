@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomToast from "../customToast/CustomToast";
-import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
-import { ShoppingCart } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useParams } from "react-router-dom";
 import { Separator } from "../ui/separator";
@@ -12,7 +10,7 @@ import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
 const SingleGood = ({ addCartItem }) => {
   const { itemId } = useParams();
   const [sticker, setSticker] = useState({});
-  const { loading, error, getStickerById } = useStickersApi();
+  const { loading, error, getStickerById, clearError } = useStickersApi();
 
   useEffect(() => {
     getStickerById(itemId).then(setSticker).catch();
@@ -29,7 +27,7 @@ const SingleGood = ({ addCartItem }) => {
     />
   ) : null;
   const content =
-    loading || error ? null : (
+    loading || error || !sticker ? null : (
       <CardContent>
         <div className="flex justify-center items-center">
           <img
@@ -62,7 +60,7 @@ const SingleGood = ({ addCartItem }) => {
       </CardContent>
     );
   const charasteristics =
-    loading || error ? null : (
+    loading || error || !sticker ? null : (
       <>
         <h2 className="text-3xl font-semibold mb-4">Characteristics:</h2>
         <ul className="text-gray-600">

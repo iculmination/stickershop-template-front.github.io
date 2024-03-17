@@ -1,16 +1,6 @@
 import { ShoppingCart, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-
-// const cartItems = [
-//   { name: "React.js", price: 5, size: "6 cm x 6 cm" },
-//   { name: "React.js", price: 7, size: "4 cm x 6 cm" },
-//   { name: "React.js", price: 25, size: "6 cm x 20 cm" },
-//   { name: "React.js", price: 10, size: "6 cm x 6 cm" },
-//   { name: "React.js", price: 3, size: "8 cm x 6 cm" },
-//   { name: "React.js", price: 1, size: "6 cm x 9 cm" },
-// ];
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
   let total = 0;
@@ -36,13 +26,12 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
         </div>
 
         <div className="w-full md:w-1/2 lg:w-1/3 mx-auto bg-white rounded-md p-4">
-          <p className="font-semibold md:text-xl text-center mx-auto">
+          <div className="font-semibold md:text-xl text-center mx-auto">
             Total: ${total}{" "}
             <p className="text-gray-400 font-normal text-[12px] md:text-sm">
               ({totalItems} items, {cartItems.length} different)
             </p>
-          </p>
-          {/* <p>total: {total}</p> */}
+          </div>
           <Button size="lg" className="mt-6 w-full">
             <ShoppingCart className="w-5 mr-2" />
             BUY

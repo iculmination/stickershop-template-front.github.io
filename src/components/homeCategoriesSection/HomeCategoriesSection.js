@@ -64,9 +64,11 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
             </h2>
           </Link>
         </div>
-        <Button className="w-2/4 self-center" size="lg">
-          More categories
-        </Button>
+        <Link to="/catalog" className="w-1/2 self-center">
+          <Button className="w-full" size="lg">
+            More categories
+          </Button>
+        </Link>
       </div>
     </section>
   );

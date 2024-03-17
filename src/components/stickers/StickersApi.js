@@ -4,14 +4,18 @@ const useStickersApi = () => {
   const { loading, request, error, clearError } = useHttp();
   const _apiBase = "https://stickershop20240313123631.azurewebsites.net/api";
 
-  const getStickersByCategory = () => {};
-
-  const getAllStickers = async () => {
-    const res = await request(`${_apiBase}/Stickers`);
-    return res.map((sticker) => transformSticker(sticker));
+  const getAllStickers = async (parameters = "") => {
+    clearError();
+    const res = await request(
+      `${_apiBase}/Stickers/${
+        parameters?.length > 1 ? parameters.join("/") : parameters
+      }`
+    );
+    if (res) return res.map((sticker) => transformSticker(sticker));
   };
 
   const getStickerById = async (id) => {
+    clearError();
     const res = await request(`${_apiBase}/Stickers/${id}`);
     return transformSticker(res);
   };
