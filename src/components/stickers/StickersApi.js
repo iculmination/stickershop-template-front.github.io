@@ -25,8 +25,12 @@ const useStickersApi = () => {
       .join("&");
     console.log(queryString);
     const res = await request(`${_apiBase}/Stickers/filter?${queryString}`);
-
-    if (res) return res.map((sticker) => transformSticker(sticker));
+    console.log(res);
+    if (res)
+      return {
+        stickers: res.stickers.map((sticker) => transformSticker(sticker)),
+        count: res.count,
+      };
   };
 
   const getStickerById = async (id) => {

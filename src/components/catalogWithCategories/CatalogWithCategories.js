@@ -42,7 +42,7 @@ const CatalogWithCategories = ({ filters, setOptions, addCartItem }) => {
 };
 
 const Catalog = ({ filters, addCartItem, setOptions }) => {
-  const [stickers, setStickers] = useState([]);
+  const [stickers, setStickers] = useState({ stickers: [], count: 0 });
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
@@ -67,9 +67,10 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
     ) : (
       <div className="flex flex-col pb-16">
         <div className="w-full gap-5 justify-center flex flex-wrap">
-          {stickers.map((el, i) => {
+          {stickers.stickers.map((el, i) => {
             return (
               <motion.div
+                key={el.id}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
@@ -78,11 +79,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
                   ease: [0, 0.71, 0.2, 1.01],
                 }}
               >
-                <CardElement
-                  itemData={el}
-                  addCartItem={addCartItem}
-                  key={el.id}
-                />
+                <CardElement itemData={el} addCartItem={addCartItem} />
               </motion.div>
             );
           })}

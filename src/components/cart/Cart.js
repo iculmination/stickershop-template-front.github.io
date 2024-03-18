@@ -17,6 +17,7 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
           {cartItems.map((item, i) => {
             return (
               <motion.div
+                key={item.id}
                 initial={{ opacity: 0, translateX: 500 }}
                 animate={{ opacity: 1, translateX: 0 }}
                 transition={{
@@ -29,7 +30,6 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
                   itemData={item}
                   removeCartItem={removeCartItem}
                   editCartItem={editCartItem}
-                  key={item.id}
                 />
               </motion.div>
             );

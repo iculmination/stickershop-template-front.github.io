@@ -16,6 +16,13 @@ const SingleGood = ({ addCartItem }) => {
     getStickerById(itemId).then(setSticker).catch();
   }, []);
 
+  const stickerColors =
+    sticker.colors?.length > 1 ? sticker.colors.join(", ") : sticker.colors;
+  const stickerCategories =
+    sticker.categories?.length > 1
+      ? sticker.categories.join(", ")
+      : sticker.categories;
+
   const spinner = loading ? (
     <img alt="loading..." src={spinnerSvg} className="mx-auto" />
   ) : null;
@@ -71,19 +78,9 @@ const SingleGood = ({ addCartItem }) => {
           <Separator className="mb-2 mt-2" />
           <li>Sizes: Small, Medium, Large</li>
           <Separator className="mb-2 mt-2" />
-          <li>
-            Colors:{" "}
-            {sticker.colors?.length > 1
-              ? sticker.colors.join(", ")
-              : sticker.colors}
-          </li>
+          <li>Colors: {stickerColors.toLowerCase()}</li>
           <Separator className="mb-2 mt-2" />
-          <li>
-            Categories:{" "}
-            {sticker.categories?.length > 1
-              ? sticker.categories.join(", ")
-              : sticker.categories}
-          </li>
+          <li>Categories: {stickerCategories.toLowerCase()}</li>
           <Separator className="mb-2 mt-2" />
           <li>In stock: {sticker.inStock}</li>
         </ul>

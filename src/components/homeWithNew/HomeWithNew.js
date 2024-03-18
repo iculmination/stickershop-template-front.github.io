@@ -24,11 +24,12 @@ import { useState, useEffect } from "react";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
 
 const HomeWithNew = ({ addCartItem }) => {
-  const [stickers, setStickers] = useState([]);
+  const [stickers, setStickers] = useState({ stickers: [], count: 0 });
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
     getAllStickers({ isNew: true }).then(setStickers).catch();
+    console.log(stickers);
   }, []);
 
   const spinner = loading ? (
@@ -55,7 +56,7 @@ const HomeWithNew = ({ addCartItem }) => {
         ]}
       >
         <CarouselContent>
-          {stickers.map((el) => {
+          {stickers.stickers.map((el) => {
             return (
               <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={el.id}>
                 <CardElement itemData={el} addCartItem={addCartItem} />
