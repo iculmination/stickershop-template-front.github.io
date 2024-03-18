@@ -10,6 +10,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Auth = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -94,7 +95,15 @@ const Auth = ({ setUser }) => {
     );
   return (
     <section className="container pb-12 pt-12 lg:pb-36 lg:pt-36 w-full flex flex-col justify-center items-center">
-      <div className="bg-white min-h-96  rounded-md w-full md:w-1/2 lg:w-1/3 flex flex-col justify-center pb-6 drop-shadow">
+      <motion.div
+        className="bg-white min-h-96  rounded-md w-full md:w-1/2 lg:w-1/3 flex flex-col justify-center pb-6 drop-shadow"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mx-auto w-full pt-8 pr-8 pl-8 focus:outline-none flex flex-col"
@@ -177,7 +186,7 @@ const Auth = ({ setUser }) => {
           </Button>
           {accountButton}
         </form>
-      </div>
+      </motion.div>
     </section>
   );
 };

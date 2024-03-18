@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
 import { useState, useEffect } from "react";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
+import {motion} from "framer-motion";
 
 const HomeWithNew = ({ addCartItem }) => {
   const [stickers, setStickers] = useState({ stickers: [], count: 0 });
@@ -71,7 +72,15 @@ const HomeWithNew = ({ addCartItem }) => {
 
   return (
     <section className="container pb-6 w-full">
-      <div className="bg-white min-h-96 rounded-md w-full flex flex-col justify-center pb-6">
+      <motion.div
+        className="bg-white min-h-96 rounded-md w-full flex flex-col justify-center pb-6"
+        initial={{ opacity: 0, translateY: 1000 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         <h1 className="text-4xl pl-10 pt-8 text-[#728299]">New</h1>
         <div className="p-10 w-full gap-4 lg:gap-6 justify-center flex flex-wrap">
           {spinner} {errorMessage} {content}
@@ -81,7 +90,7 @@ const HomeWithNew = ({ addCartItem }) => {
             To catalog
           </Button>
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -90,15 +99,13 @@ const CardElement = ({ addCartItem, itemData }) => {
   return (
     <Card className="group ">
       <Link to={"/item/" + itemData.id}>
-        <CardHeader className="flex flex-row justify-between">
+        <CardHeader className="flex flex-row h-16 justify-between">
           <div className="">
-            <CardTitle>
-              {itemData.name}
-              <Badge className="ml-2" variant="secondary">
-                NEW
-              </Badge>
-            </CardTitle>
+            <CardTitle>{itemData.name}</CardTitle>
             <CardDescription>{itemData.size}</CardDescription>
+            <Badge className="mt-1" variant="">
+              NEW
+            </Badge>
           </div>
           <CardTitle className="text-2xl">${itemData.price}</CardTitle>
         </CardHeader>

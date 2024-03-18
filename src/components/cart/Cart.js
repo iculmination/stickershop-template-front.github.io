@@ -36,7 +36,16 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
           })}
         </div>
 
-        <div className="w-full md:w-1/2 lg:w-1/3 mx-auto bg-white rounded-md p-4">
+        <motion.div
+          className="w-full md:w-1/2 lg:w-1/3 mx-auto bg-white rounded-md p-4"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 1,
+            duration: 1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+        >
           <div className="font-semibold md:text-xl text-center mx-auto">
             Total: ${total}{" "}
             <p className="text-gray-400 font-normal text-[12px] md:text-sm">
@@ -47,7 +56,7 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
             <ShoppingCart className="w-5 mr-2" />
             BUY
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,10 +1,19 @@
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const HomeCategoriesSection = ({ setOptions }) => {
   return (
     <section className="container pt-6 pb-6 w-full">
-      <div className="bg-white min-h-96 rounded-md w-full flex flex-col pb-6">
+      <motion.div
+        className="bg-white min-h-96 rounded-md w-full flex flex-col pb-6"
+        initial={{ opacity: 0, translateY: 1000 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         <h1 className="text-2xl md:text-4xl pl-10 pt-8 text-[#728299]">
           Available stickers categories
         </h1>
@@ -69,7 +78,7 @@ const HomeCategoriesSection = ({ setOptions }) => {
             More categories
           </Button>
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 };

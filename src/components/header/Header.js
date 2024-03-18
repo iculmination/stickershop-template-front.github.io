@@ -18,10 +18,20 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 
+import { motion } from "framer-motion";
+
 const Header = ({ setOptions, user }) => {
   return (
     <header className="bg-white w-full drop-shadow-md">
-      <div className="container bg-white h-24 w-full flex justify-between items-center">
+      <motion.div
+        className="container bg-white h-24 w-full flex justify-between items-center"
+        // initial={{ opacity: 0, translateY: -100 }}
+        // animate={{ opacity: 1, translateY: 0 }}
+        // transition={{
+        //   duration: 1,
+        //   ease: [0, 0.71, 0.2, 1.01],
+        // }}
+      >
         <Link to="/">
           <img
             src="https://static-00.iconduck.com/assets.00/sticker-icon-512x512-rzveai8i.png"
@@ -126,7 +136,7 @@ const Header = ({ setOptions, user }) => {
             </SheetFooter>
           </SheetContent>
         </Sheet>
-      </div>
+      </motion.div>
     </header>
   );
 };

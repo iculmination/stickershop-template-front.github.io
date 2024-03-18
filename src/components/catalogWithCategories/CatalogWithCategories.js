@@ -138,7 +138,15 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
     );
 
   return (
-    <div className="bg-white w-full rounded-md p-6 drop-shadow">
+    <motion.div
+      className="bg-white w-full rounded-md p-6 drop-shadow "
+      initial={{ opacity: 0, translateX: 500 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      transition={{
+        duration: 1,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
+    >
       <div className="mb-6 flex w-full justify-between pl-6 pr-6">
         <Label className="text-xl mt-1">
           {filters ? "Category: " + filters.category : "Catalog"}
@@ -175,7 +183,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
       {spinner}
       {errorMessage}
       {content}
-    </div>
+    </motion.div>
   );
 };
 
@@ -280,9 +288,9 @@ const CardElement = ({ addCartItem, itemData }) => {
   return (
     <Card className="group w-56 cursor-pointer">
       <Link to={"/item/" + itemData.id}>
-        <CardHeader className="flex flex-row justify-between">
+        <CardHeader className="flex h-16 flex-row justify-between">
           <div className="">
-            <CardTitle>{itemData.name}</CardTitle>
+            <CardTitle className="">{itemData.name}</CardTitle>
             <CardDescription>{itemData.size}</CardDescription>
             {itemData.isNew ? (
               <Badge variant="" className="mt-1 absolute">

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Separator } from "../ui/separator";
 import useStickersApi from "../stickers/StickersApi";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
+import { motion } from "framer-motion";
 
 const SingleGood = ({ addCartItem }) => {
   const { itemId } = useParams();
@@ -78,9 +79,9 @@ const SingleGood = ({ addCartItem }) => {
           <Separator className="mb-2 mt-2" />
           <li>Sizes: Small, Medium, Large</li>
           <Separator className="mb-2 mt-2" />
-          <li>Colors: {stickerColors.toLowerCase()}</li>
+          <li>Colors: {stickerColors?.toLowerCase()}</li>
           <Separator className="mb-2 mt-2" />
-          <li>Categories: {stickerCategories.toLowerCase()}</li>
+          <li>Categories: {stickerCategories?.toLowerCase()}</li>
           <Separator className="mb-2 mt-2" />
           <li>In stock: {sticker.inStock}</li>
         </ul>
@@ -89,17 +90,31 @@ const SingleGood = ({ addCartItem }) => {
 
   return (
     <section className="container pt-6 pb-6 lg:flex relative min-h-[700px] lg:justify-between items-center gap-10">
-      <Card className="w-full lg:w-2/5 p-6 h-full ">
+      <motion.Card
+        className="w-full lg:w-2/5 p-6 h-full bg-white rounded-md drop-shadow"
+        initial={{ opacity: 0, translateY: 1000 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         {spinner}
         {errorMessage}
         {content}
-      </Card>
+      </motion.Card>
 
-      <div className="bg-white w-full lg:w-3/5 rounded-md p-6 h-full drop-shadow mt-8 mb-8">
+      <motion.div className="bg-white w-full lg:w-3/5 rounded-md p-6 h-full drop-shadow mt-8 mb-8"
+       initial={{ opacity: 0, translateY: 1000 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}>
         {spinner}
         {errorMessage}
         {charasteristics}
-      </div>
+      </motion.div>
     </section>
   );
 };
