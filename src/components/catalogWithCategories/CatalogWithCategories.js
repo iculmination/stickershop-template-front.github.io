@@ -12,6 +12,8 @@ import {
   SelectValue,
 } from "../ui/select";
 
+import { motion } from "framer-motion";
+
 import {
   Card,
   CardContent,
@@ -65,13 +67,23 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
     ) : (
       <div className="flex flex-col pb-16">
         <div className="w-full gap-5 justify-center flex flex-wrap">
-          {stickers.map((el) => {
+          {stickers.map((el, i) => {
             return (
-              <CardElement
-                itemData={el}
-                addCartItem={addCartItem}
-                key={el.id}
-              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  delay: i / 10,
+                  ease: [0, 0.71, 0.2, 1.01],
+                }}
+              >
+                <CardElement
+                  itemData={el}
+                  addCartItem={addCartItem}
+                  key={el.id}
+                />
+              </motion.div>
             );
           })}
         </div>
@@ -135,13 +147,28 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
           {filters ? "Category: " + filters.category : "Catalog"}
         </Label>
 
-        <Select>
+        <Select
+          defaultValue="without"
+          onValueChange={(value) => {
+            switch (value) {
+              case "new":
+                setOptions({ isNew: !filters.isNew, discount: undefined });
+                break;
+              case "discount":
+                setOptions({ discount: !filters.discount, isNew: undefined });
+                break;
+              default:
+                setOptions({ discount: undefined, isNew: undefined });
+            }
+          }}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filters" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Filter by</SelectLabel>
+              <SelectItem value="without">Without filters</SelectItem>
               <SelectItem value="new">New</SelectItem>
               <SelectItem value="discount">Discount</SelectItem>
             </SelectGroup>
@@ -195,7 +222,16 @@ const Categories = ({ filters, setOptions }) => {
   }, []);
 
   return (
-    <div className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow">
+    <motion.div
+      className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow"
+      initial={{ opacity: 0, translateX: -500 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      transition={{
+        duration: 0.5,
+        delay: 0.8,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
+    >
       <h2 className="text-xl text-center">Categories</h2>
       <div className="w-full bg-violet-50 p-4 flex flex-col justify-start items-start mt-6 rounded-md text-md min-h-80">
         {categories.map((el) => {
@@ -239,7 +275,7 @@ const Categories = ({ filters, setOptions }) => {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,6 +1,7 @@
 import { ShoppingCart, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
   let total = 0;
@@ -13,14 +14,24 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
     <section className="container pt-8 pb-8 w-full">
       <div className="min-h-96 rounded-md w-full flex flex-col pb-6 gap-8">
         <div className="flex flex-col w-full rounded-md gap-4">
-          {cartItems.map((item) => {
+          {cartItems.map((item, i) => {
             return (
-              <CartItem
-                itemData={item}
-                removeCartItem={removeCartItem}
-                editCartItem={editCartItem}
-                key={item.id}
-              />
+              <motion.div
+                initial={{ opacity: 0, translateX: 500 }}
+                animate={{ opacity: 1, translateX: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.2 + i / 10,
+                  ease: [0, 0.71, 0.2, 1.01],
+                }}
+              >
+                <CartItem
+                  itemData={item}
+                  removeCartItem={removeCartItem}
+                  editCartItem={editCartItem}
+                  key={item.id}
+                />
+              </motion.div>
             );
           })}
         </div>
