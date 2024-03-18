@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
-const HomeCategoriesSection = ({ setSelectedCategory }) => {
+const HomeCategoriesSection = ({ setOptions }) => {
   return (
     <section className="container pt-6 pb-6 w-full">
       <div className="bg-white min-h-96 rounded-md w-full flex flex-col pb-6">
@@ -11,7 +11,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Animals")}
+            onClick={() => setOptions({ category: "Animals" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
@@ -20,7 +20,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Food")}
+            onClick={() => setOptions({ category: "Food" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
@@ -29,7 +29,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Money")}
+            onClick={() => setOptions({ category: "Money" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md md:col-span-2 lg:col-span-1 lg:row-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
@@ -38,7 +38,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Programming")}
+            onClick={() => setOptions({ category: "Programming" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md lg:col-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
@@ -47,7 +47,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Videogames")}
+            onClick={() => setOptions({ category: "Videogames" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">
@@ -56,7 +56,7 @@ const HomeCategoriesSection = ({ setSelectedCategory }) => {
           </Link>
           <Link
             to="/catalog"
-            onClick={() => setSelectedCategory("Music")}
+            onClick={() => setOptions({ category: "Music" })}
             className="cursor-pointer transition duration-300 hover:bg-violet-400 hover:scale-[102%] bg-violet-300 w-full min-h-48 md:min-h-72 rounded-md md:col-span-2"
           >
             <h2 className="text-xl md:text-3xl font-bold p-8 text-white">

@@ -12,14 +12,24 @@ import Cart from "./components/cart/Cart";
 import User from "./components/user/User";
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedColor, setSelectedColor] = useState("All");
+  const [filters, setFilters] = useState({
+    isNew: undefined,
+    discount: undefined,
+    category: "All",
+    color: "Any",
+    page: 1,
+    size: 12,
+  });
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState({ login: "emptyUser" });
 
   useEffect(() => {
     document.title = "Stickers Shop";
   }, []);
+
+  const setOptions = (newFilters) => {
+    setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
+  };
 
   const addCartItem = (newItem) => {
     const existingItem = cartItems.find((item) => item.id === newItem.id);
@@ -47,17 +57,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header setSelectedCategory={setSelectedCategory} user={user} />
+        <Header setOptions={setOptions} user={user} />
         <div className=" bg-violet-100 w-full min-h-screen">
           <Routes>
             <Route
               path="/catalog"
               element={
                 <CatalogWithCategories
-                  selectedCategory={selectedCategory}
-                  setSelectedCategory={setSelectedCategory}
-                  selectedColor={selectedColor}
-                  setSelectedColor={setSelectedColor}
+                  filters={filters}
+                  setOptions={setOptions}
                   addCartItem={addCartItem}
                 />
               }
@@ -66,9 +74,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <HomeCategoriesSection
-                    setSelectedCategory={setSelectedCategory}
-                  />
+                  <HomeCategoriesSection setOptions={setOptions} />
                   <HomeWithNew addCartItem={addCartItem} />
                 </>
               }

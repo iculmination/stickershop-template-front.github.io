@@ -4,13 +4,28 @@ const useStickersApi = () => {
   const { loading, request, error, clearError } = useHttp();
   const _apiBase = "https://stickershop20240313123631.azurewebsites.net/api";
 
-  const getAllStickers = async (parameters = "") => {
+  const getAllStickers = async (filters) => {
     clearError();
-    const res = await request(
-      `${_apiBase}/Stickers/${
-        parameters?.length > 1 ? parameters.join("/") : parameters
-      }`
-    );
+
+    const defaultParams = {
+      isNew: undefined,
+      discount: undefined,
+      category: undefined,
+      color: undefined,
+      page: 1,
+      size: 12,
+    };
+
+    const params = { ...defaultParams, ...filters };
+    if (filters.category === "All") params.category = undefined;
+    if (filters.color === "Any") params.color = undefined;
+    const queryString = Object.entries(params)
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&");
+    console.log(queryString);
+    const res = await request(`${_apiBase}/Stickers/filter?${queryString}`);
+
     if (res) return res.map((sticker) => transformSticker(sticker));
   };
 

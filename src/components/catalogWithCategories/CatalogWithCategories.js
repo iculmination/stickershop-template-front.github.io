@@ -21,53 +21,31 @@ import {
   CardTitle,
 } from "../ui/card";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "../ui/pagination";
-
 import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
 import { Badge } from "../ui/badge";
 
-const CatalogWithCategories = ({
-  selectedCategory,
-  setSelectedCategory,
-  addCartItem,
-  selectedColor,
-  setSelectedColor,
-}) => {
+const CatalogWithCategories = ({ filters, setOptions, addCartItem }) => {
   return (
     <section className="container w-full flex gap-6 pt-6 pb-6">
-      <Categories
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
+      <Categories filters={filters} setOptions={setOptions} />
+      <Catalog
+        filters={filters}
+        addCartItem={addCartItem}
+        setOptions={setOptions}
       />
-      <Catalog selectedCategory={selectedCategory} addCartItem={addCartItem} />
     </section>
   );
 };
 
-const Catalog = ({ selectedCategory, addCartItem }) => {
-  // const [sort, setSort] = useState("top");
+const Catalog = ({ filters, addCartItem, setOptions }) => {
   const [stickers, setStickers] = useState([]);
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
-    const parameters =
-      selectedCategory === "All"
-        ? ""
-        : `category=${selectedCategory.toLowerCase()}`;
-    getAllStickers([parameters]).then(setStickers).catch();
-  }, [selectedCategory]);
+    getAllStickers(filters).then(setStickers).catch();
+  }, [filters]);
 
   const spinner = loading ? (
     <img alt="loading..." src={spinnerSvg} className="mx-auto" />
@@ -85,7 +63,7 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
         No stickers found in this category.
       </p>
     ) : (
-      <>
+      <div className="flex flex-col pb-16">
         <div className="w-full gap-5 justify-center flex flex-wrap">
           {stickers.map((el) => {
             return (
@@ -98,50 +76,74 @@ const Catalog = ({ selectedCategory, addCartItem }) => {
           })}
         </div>
 
-        <Pagination className="mt-8">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#" isActive>
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </>
+        <nav className="self-center fixed bottom-0 mb-6 items-center flex flex-col">
+          pagination is temporarily down
+          <ul className="list-style-none flex gap-2">
+            <li>
+              <span>
+                <Button
+                  variant="outline"
+                  onClick={() => setOptions({ page: filters.page - 1 })}
+                >
+                  &laquo;
+                </Button>
+              </span>
+            </li>
+            <li>
+              <Button
+                variant={filters.page === 1 ? "" : "outline"}
+                onClick={() => setOptions({ page: filters.page })}
+              >
+                {filters.page}
+              </Button>
+            </li>
+            <li>
+              <Button
+                variant={filters.page === 2 ? "" : "outline"}
+                onClick={() => setOptions({ page: filters.page + 1 })}
+              >
+                {filters.page + 1}
+              </Button>
+            </li>
+            <li>
+              <Button
+                variant={filters.page === 3 ? "" : "outline"}
+                onClick={() => setOptions({ page: filters.page + 2 })}
+              >
+                {filters.page + 2}
+              </Button>
+            </li>
+            <li>
+              <span>
+                <Button
+                  variant="outline"
+                  onClick={() => setOptions({ page: filters.page + 1 })}
+                >
+                  &raquo;
+                </Button>
+              </span>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
 
   return (
     <div className="bg-white w-full rounded-md p-6 drop-shadow">
       <div className="mb-6 flex w-full justify-between pl-6 pr-6">
         <Label className="text-xl mt-1">
-          {selectedCategory ? "Category: " + selectedCategory : "Catalog"}
+          {filters ? "Category: " + filters.category : "Catalog"}
         </Label>
 
         <Select>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort by" />
+            <SelectValue placeholder="Filters" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Sorting by</SelectLabel>
-              <SelectItem value="apple">Price</SelectItem>
-              <SelectItem value="banana">Size</SelectItem>
-              <SelectItem value="blueberry">Name</SelectItem>
+              <SelectLabel>Filter by</SelectLabel>
+              <SelectItem value="new">New</SelectItem>
+              <SelectItem value="discount">Discount</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -169,7 +171,7 @@ const categories = [
 ];
 
 const colors = [
-  { name: "any", HEX: "" },
+  { name: "Any", HEX: "" },
   { name: "red", HEX: "#ff0000" },
   { name: "blue", HEX: "#8ccef5" },
   { name: "sky", HEX: "#4287f5" },
@@ -183,12 +185,7 @@ const colors = [
   { name: "violet", HEX: "#9f1be0" },
 ];
 
-const Categories = ({
-  selectedCategory,
-  setSelectedCategory,
-  selectedColor,
-  setSelectedColor,
-}) => {
+const Categories = ({ filters, setOptions }) => {
   const buttonRef = useRef(null);
 
   useEffect(() => {
@@ -203,12 +200,12 @@ const Categories = ({
       <div className="w-full bg-violet-50 p-4 flex flex-col justify-start items-start mt-6 rounded-md text-md min-h-80">
         {categories.map((el) => {
           const buttonClassName =
-            selectedCategory === el.name
+            filters.category === el.name
               ? "focus:outline-none bg-white text-black p-4 pl-4 w-full transition duration-300"
               : "text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-4 pl-4 w-full";
           return (
             <Button
-              onClick={() => setSelectedCategory(el.name)}
+              onClick={() => setOptions({ category: el.name })}
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
@@ -222,20 +219,22 @@ const Categories = ({
       <h2 className="text-xl mt-6 text-center">Colors</h2>
       <div className="w-full bg-violet-50 p-4 flex justify-between items-start flex-wrap mt-6 rounded-md text-md min-h-80">
         {colors.map((el) => {
-          const hexClassName = "rounded-full w-full h-full bg-[" + el.HEX + "]";
           const buttonClassName =
-            selectedColor === el.name
+            filters.color === el.name
               ? "size-14 focus:outline-none bg-white p-3 transition duration-300"
-              : "size-14 text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-3";
+              : "size-14 transition duration-300 hover:bg-violet-100 focus:outline-none p-3 ";
           return (
             <Button
-              onClick={() => setSelectedColor(el.name)}
+              onClick={() => setOptions({ color: el.name })}
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
               key={el.name}
             >
-              <div className={hexClassName}>{el.HEX}</div>
+              <div
+                className="rounded-full w-full h-full border"
+                style={{ backgroundColor: el.HEX }}
+              ></div>
             </Button>
           );
         })}

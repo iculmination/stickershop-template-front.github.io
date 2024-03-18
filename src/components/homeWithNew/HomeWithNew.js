@@ -28,7 +28,7 @@ const HomeWithNew = ({ addCartItem }) => {
   const { loading, error, getAllStickers } = useStickersApi();
 
   useEffect(() => {
-    getAllStickers(["new"]).then(setStickers).catch();
+    getAllStickers({ isNew: true }).then(setStickers).catch();
   }, []);
 
   const spinner = loading ? (

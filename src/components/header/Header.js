@@ -18,7 +18,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 
-const Header = ({ setSelectedCategory, user }) => {
+const Header = ({ setOptions, user }) => {
   return (
     <header className="bg-white w-full drop-shadow-md">
       <div className="container bg-white h-24 w-full flex justify-between items-center">
@@ -44,7 +44,7 @@ const Header = ({ setSelectedCategory, user }) => {
                     variant="ghost"
                     size=""
                     type="submit"
-                    // onClick={() => setSelectedCategory("Popular")}
+                    // onClick={() => setOptions("Popular")}
                   >
                     Catalog
                   </Button>
@@ -94,7 +94,7 @@ const Header = ({ setSelectedCategory, user }) => {
                           variant="ghost"
                           size=""
                           type="submit"
-                          // onClick={() => setSelectedCategory("Popular")}
+                          // onClick={() => setOptions("Popular")}
                         >
                           Catalog
                         </Button>
