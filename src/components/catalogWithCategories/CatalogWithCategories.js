@@ -204,17 +204,17 @@ const categories = [
 
 const colors = [
   { name: "Any", HEX: "" },
-  { name: "red", HEX: "#ff0000" },
-  { name: "blue", HEX: "#8ccef5" },
-  { name: "sky", HEX: "#4287f5" },
+  { name: "Red", HEX: "#ff0000" },
+  { name: "Blue", HEX: "#8ccef5" },
+  { name: "Sky", HEX: "#4287f5" },
   { name: "yellow", HEX: "#ebe426" },
-  { name: "orange", HEX: "#f2b633" },
-  { name: "green", HEX: "#34f01f" },
-  { name: "brown", HEX: "#734518" },
-  { name: "white", HEX: "#ffffff" },
-  { name: "black", HEX: "#000000" },
-  { name: "gray", HEX: "#7d7d7d" },
-  { name: "violet", HEX: "#9f1be0" },
+  { name: "Orange", HEX: "#f2b633" },
+  { name: "Green", HEX: "#34f01f" },
+  { name: "Brown", HEX: "#734518" },
+  { name: "White", HEX: "#ffffff" },
+  { name: "Black", HEX: "#000000" },
+  { name: "Grey", HEX: "#7d7d7d" },
+  { name: "Purple", HEX: "#9f1be0" },
 ];
 
 const Categories = ({ filters, setOptions }) => {

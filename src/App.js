@@ -58,7 +58,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header setOptions={setOptions} user={user} />
-        <div className=" bg-[url('https://img.freepik.com/premium-vector/multicolored-graffiti-background-with-spray-letters-colored-lettering-tags-seamless-pattern_516886-94.jpg')]  w-full min-h-screen">
+        <div className=" bg-[url('https://i.pinimg.com/originals/53/3e/20/533e20a09f7427f953694157876f976f.jpg')]  w-full min-h-screen">
           <Routes>
             <Route
               path="/catalog"
