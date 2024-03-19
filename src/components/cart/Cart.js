@@ -2,6 +2,7 @@ import { ShoppingCart, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
   let total = 0;
@@ -10,30 +11,55 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
     total += item.quantity * item.price;
     totalItems += item.quantity;
   });
-  return (
-    <section className="container pt-8 pb-8 w-full">
-      <div className="min-h-96 rounded-md w-full flex flex-col pb-6 gap-8">
+  const content =
+    cartItems.length === 0 ? (
+      <motion.div
+        className="w-full md:w-1/2 lg:w-1/3 mx-auto bg-white rounded-md p-4 mt-36"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
+        <div className="font-semibold md:text-xl text-center mx-auto">
+          Oops...
+          <p className=" font-normal text-sm md:text-md">
+            It looks like your cart is empty
+          </p>
+        </div>
+        <Link to="/catalog">
+          <Button size="lg" className="mt-6 w-full">
+            <ShoppingCart className="w-5 mr-2" />
+            Go shopping
+          </Button>
+        </Link>
+      </motion.div>
+    ) : (
+      <>
         <div className="flex flex-col w-full rounded-md gap-4">
-          {cartItems.map((item, i) => {
-            return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, translateX: 500 }}
-                animate={{ opacity: 1, translateX: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.2 + i / 10,
-                  ease: [0, 0.71, 0.2, 1.01],
-                }}
-              >
-                <CartItem
-                  itemData={item}
-                  removeCartItem={removeCartItem}
-                  editCartItem={editCartItem}
-                />
-              </motion.div>
-            );
-          })}
+          <AnimatePresence>
+            {cartItems.map((item, i) => {
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, translateX: 500 }}
+                  animate={{ opacity: 1, translateX: 0 }}
+                  exit={{ translateX: 500, opacity: 0 }}
+                  transition={{
+                    duration: 1,
+                    ease: [0, 0.71, 0.2, 1.01],
+                  }}
+                >
+                  <CartItem
+                    itemData={item}
+                    removeCartItem={removeCartItem}
+                    editCartItem={editCartItem}
+                  />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
 
         <motion.div
@@ -41,7 +67,7 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            delay: 1,
+            delay: 0.5,
             duration: 1,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -57,6 +83,12 @@ const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
             BUY
           </Button>
         </motion.div>
+      </>
+    );
+  return (
+    <section className="container pt-8 pb-8 w-full">
+      <div className="min-h-96 rounded-md w-full flex flex-col pb-6 gap-8">
+        {content}
       </div>
     </section>
   );

@@ -10,19 +10,19 @@ import { motion } from "framer-motion";
 
 const SingleGood = ({ addCartItem }) => {
   const { itemId } = useParams();
-  const [sticker, setSticker] = useState({});
-  const { loading, error, getStickerById, clearError } = useStickersApi();
+  const [sticker, setSticker] = useState({ colors: "", categories: "" });
+  const { loading, error, getStickerById } = useStickersApi();
 
   useEffect(() => {
     getStickerById(itemId).then(setSticker).catch();
   }, []);
 
   const stickerColors =
-    sticker.colors?.length > 1 ? sticker.colors.join(", ") : sticker.colors;
+    sticker.colors?.length > 1 ? sticker.colors.join(", ") : sticker.colors[0];
   const stickerCategories =
     sticker.categories?.length > 1
       ? sticker.categories.join(", ")
-      : sticker.categories;
+      : sticker.categories[0];
 
   const spinner = loading ? (
     <img alt="loading..." src={spinnerSvg} className="mx-auto" />
@@ -90,7 +90,7 @@ const SingleGood = ({ addCartItem }) => {
 
   return (
     <section className="container pt-6 pb-6 lg:flex relative min-h-[700px] lg:justify-between items-center gap-10">
-      <motion.Card
+      <motion.div
         className="w-full lg:w-2/5 p-6 h-full bg-white rounded-md drop-shadow"
         initial={{ opacity: 0, translateY: 1000 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -102,15 +102,17 @@ const SingleGood = ({ addCartItem }) => {
         {spinner}
         {errorMessage}
         {content}
-      </motion.Card>
+      </motion.div>
 
-      <motion.div className="bg-white w-full lg:w-3/5 rounded-md p-6 h-full drop-shadow mt-8 mb-8"
-       initial={{ opacity: 0, translateY: 1000 }}
+      <motion.div
+        className="bg-white w-full lg:w-3/5 rounded-md p-6 h-full drop-shadow mt-8 mb-8"
+        initial={{ opacity: 0, translateY: 1000 }}
         animate={{ opacity: 1, translateY: 0 }}
         transition={{
           duration: 1,
           ease: [0, 0.71, 0.2, 1.01],
-        }}>
+        }}
+      >
         {spinner}
         {errorMessage}
         {charasteristics}
