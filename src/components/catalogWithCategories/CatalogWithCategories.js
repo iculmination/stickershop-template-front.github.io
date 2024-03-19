@@ -44,7 +44,7 @@ const CatalogWithCategories = ({ filters, setOptions, addCartItem }) => {
 const Catalog = ({ filters, addCartItem, setOptions }) => {
   const [stickers, setStickers] = useState({ stickers: [], count: 0 });
   const { loading, error, getAllStickers } = useStickersApi();
-
+  const currentPages = Math.ceil(stickers.count / filters.size);
   useEffect(() => {
     getAllStickers(filters).then(setStickers).catch();
   }, [filters]);
@@ -60,7 +60,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
     />
   ) : null;
   const content =
-    loading || error ? null : stickers?.length === 0 ? (
+    loading || error ? null : stickers.stickers.length === 0 ? (
       <p className="text-center my-24 text-red-500">
         No stickers found in this category.
       </p>
@@ -86,47 +86,38 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
         </div>
 
         <nav className="self-center fixed bottom-0 mb-6 items-center flex flex-col">
-          pagination is temporarily down
-          <ul className="list-style-none flex gap-2">
+          <ul className="list-style-none flex">
             <li>
               <span>
                 <Button
                   variant="outline"
                   onClick={() => setOptions({ page: filters.page - 1 })}
+                  disabled={filters.page === 1}
                 >
                   &laquo;
                 </Button>
               </span>
             </li>
-            <li>
-              <Button
-                variant={filters.page === 1 ? "" : "outline"}
-                onClick={() => setOptions({ page: filters.page })}
-              >
-                {filters.page}
-              </Button>
-            </li>
-            <li>
-              <Button
-                variant={filters.page === 2 ? "" : "outline"}
-                onClick={() => setOptions({ page: filters.page + 1 })}
-              >
-                {filters.page + 1}
-              </Button>
-            </li>
-            <li>
-              <Button
-                variant={filters.page === 3 ? "" : "outline"}
-                onClick={() => setOptions({ page: filters.page + 2 })}
-              >
-                {filters.page + 2}
-              </Button>
-            </li>
+
+            {[...Array(Math.min(currentPages, 3)).keys()].map((index) => (
+              <li key={index}>
+                <Button
+                  className="ml-2"
+                  variant={filters.page === index + 1 ? "" : "outline"}
+                  onClick={() => setOptions({ page: index + 1 })}
+                >
+                  {index + 1}
+                </Button>
+              </li>
+            ))}
+
             <li>
               <span>
                 <Button
                   variant="outline"
                   onClick={() => setOptions({ page: filters.page + 1 })}
+                  className="ml-2"
+                  disabled={filters.page === currentPages}
                 >
                   &raquo;
                 </Button>
@@ -149,7 +140,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
     >
       <div className="mb-6 flex w-full justify-between pl-6 pr-6">
         <Label className="text-xl mt-1">
-          {filters ? "Category: " + filters.category : "Catalog"}
+          {"Category: " + filters.category}
         </Label>
 
         <Select
@@ -157,13 +148,21 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
           onValueChange={(value) => {
             switch (value) {
               case "new":
-                setOptions({ isNew: !filters.isNew, discount: undefined });
+                setOptions({
+                  isNew: !filters.isNew,
+                  discount: undefined,
+                  page: 1,
+                });
                 break;
               case "discount":
-                setOptions({ discount: !filters.discount, isNew: undefined });
+                setOptions({
+                  discount: !filters.discount,
+                  isNew: undefined,
+                  page: 1,
+                });
                 break;
               default:
-                setOptions({ discount: undefined, isNew: undefined });
+                setOptions({ discount: undefined, isNew: undefined, page: 1 });
             }
           }}
         >
@@ -207,7 +206,7 @@ const colors = [
   { name: "Red", HEX: "#ff0000" },
   { name: "Blue", HEX: "#8ccef5" },
   { name: "Sky", HEX: "#4287f5" },
-  { name: "yellow", HEX: "#ebe426" },
+  { name: "Yellow", HEX: "#ebe426" },
   { name: "Orange", HEX: "#f2b633" },
   { name: "Green", HEX: "#34f01f" },
   { name: "Brown", HEX: "#734518" },
@@ -246,7 +245,7 @@ const Categories = ({ filters, setOptions }) => {
               : "text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-4 pl-4 w-full";
           return (
             <Button
-              onClick={() => setOptions({ category: el.name })}
+              onClick={() => setOptions({ category: el.name, page: 1 })}
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
@@ -266,7 +265,7 @@ const Categories = ({ filters, setOptions }) => {
               : "size-14 transition duration-300 hover:bg-violet-100 focus:outline-none p-3 ";
           return (
             <Button
-              onClick={() => setOptions({ color: el.name })}
+              onClick={() => setOptions({ color: el.name, page: 1 })}
               variant="ghost"
               ref={buttonRef}
               className={buttonClassName}
