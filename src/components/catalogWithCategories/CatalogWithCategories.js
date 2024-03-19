@@ -30,7 +30,7 @@ import { Badge } from "../ui/badge";
 
 const CatalogWithCategories = ({ filters, setOptions, addCartItem }) => {
   return (
-    <section className="container w-full flex gap-6 pt-6 pb-6">
+    <section className="container w-full flex flex-col md:flex-row gap-6 pt-6 pb-6">
       <Categories filters={filters} setOptions={setOptions} />
       <Catalog
         filters={filters}
@@ -227,7 +227,7 @@ const Categories = ({ filters, setOptions }) => {
 
   return (
     <motion.div
-      className="hidden lg:block p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow"
+      className=" p-6 bg-white rounded-md lg:w-1/4 pb-8 drop-shadow"
       initial={{ opacity: 0, translateX: -500 }}
       animate={{ opacity: 1, translateX: 0 }}
       transition={{
@@ -257,12 +257,12 @@ const Categories = ({ filters, setOptions }) => {
         })}
       </div>
       <h2 className="text-xl mt-6 text-center">Colors</h2>
-      <div className="w-full bg-violet-50 p-4 flex justify-between items-start flex-wrap mt-6 rounded-md text-md min-h-80">
+      <div className="w-full bg-violet-50 p-4 flex justify-between items-start flex-wrap mt-6 rounded-md text-md md:min-h-80">
         {colors.map((el) => {
           const buttonClassName =
             filters.color === el.name
-              ? "size-14 focus:outline-none bg-white p-3 transition duration-300"
-              : "size-14 transition duration-300 hover:bg-violet-100 focus:outline-none p-3 ";
+              ? "h-12 w-1/4 md:size-14 focus:outline-none bg-white p-3 transition duration-300 "
+              : "h-12 w-1/4 md:size-14 transition duration-300 hover:bg-violet-100 focus:outline-none p-3 ";
           return (
             <Button
               onClick={() => setOptions({ color: el.name, page: 1 })}
