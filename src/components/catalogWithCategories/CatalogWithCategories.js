@@ -47,6 +47,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
   const currentPages = Math.ceil(stickers.count / filters.size);
   useEffect(() => {
     getAllStickers(filters).then(setStickers).catch();
+    window.scrollTo(0, 0);
   }, [filters]);
 
   const spinner = loading ? (
@@ -65,7 +66,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
         No stickers found in this category.
       </p>
     ) : (
-      <div className="flex flex-col pb-16">
+      <div className="flex flex-col">
         <div className="w-full gap-5 justify-center flex flex-wrap">
           {stickers.stickers.map((el, i) => {
             return (
@@ -85,7 +86,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
           })}
         </div>
 
-        <nav className="self-center fixed bottom-0 mb-6 items-center flex flex-col">
+        <nav className="self-center mt-6 items-center flex flex-col">
           <ul className="list-style-none flex">
             <li>
               <span>
@@ -138,8 +139,8 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <div className="mb-6 flex w-full justify-between pl-6 pr-6">
-        <Label className="text-xl mt-1">
+      <div className="mb-6 flex flex-col md:flex-row w-full justify-between pl-6 pr-6">
+        <Label className="text-xl mt-1 mb-4 md:mb-0">
           {"Category: " + filters.category}
         </Label>
 
@@ -166,7 +167,7 @@ const Catalog = ({ filters, addCartItem, setOptions }) => {
             }
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full md:w-[180px]">
             <SelectValue placeholder="Filters" />
           </SelectTrigger>
           <SelectContent>
@@ -202,7 +203,10 @@ const categories = [
 ];
 
 const colors = [
-  { name: "Any", HEX: "" },
+  {
+    name: "Any",
+    HEX: "linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,214,0,1) 20%, rgba(22,255,0,1) 40%, rgba(0,159,255,1) 60%, rgba(184,0,255,1) 80%, rgba(255,0,0,1) 100%)",
+  },
   { name: "Red", HEX: "#ff0000" },
   { name: "Blue", HEX: "#8ccef5" },
   { name: "Sky", HEX: "#4287f5" },
@@ -241,8 +245,8 @@ const Categories = ({ filters, setOptions }) => {
         {categories.map((el) => {
           const buttonClassName =
             filters.category === el.name
-              ? "focus:outline-none bg-white text-black p-4 pl-4 w-full transition duration-300"
-              : "text-[#728299] transition duration-300 hover:bg-violet-100 focus:outline-none p-4 pl-4 w-full";
+              ? "drop-shadow bg-white text-black p-4 pl-4 w-full transition duration-300"
+              : "text-[#728299] transition duration-300 hover:bg-violet-100 outline-none p-4 pl-4 w-full";
           return (
             <Button
               onClick={() => setOptions({ category: el.name, page: 1 })}
@@ -261,8 +265,8 @@ const Categories = ({ filters, setOptions }) => {
         {colors.map((el) => {
           const buttonClassName =
             filters.color === el.name
-              ? "h-12 w-1/4 md:size-14 focus:outline-none bg-white p-3 transition duration-300 "
-              : "h-12 w-1/4 md:size-14 transition duration-300 hover:bg-violet-100 focus:outline-none p-3 ";
+              ? "h-12 w-1/4 md:size-14 bg-white p-3 transition duration-300 drop-shadow"
+              : "h-12 w-1/4 md:size-14 transition duration-300 hover:bg-violet-100 p-3 ";
           return (
             <Button
               onClick={() => setOptions({ color: el.name, page: 1 })}
@@ -273,7 +277,7 @@ const Categories = ({ filters, setOptions }) => {
             >
               <div
                 className="rounded-full w-full h-full border"
-                style={{ backgroundColor: el.HEX }}
+                style={{ background: el.HEX }}
               ></div>
             </Button>
           );
@@ -286,19 +290,24 @@ const Categories = ({ filters, setOptions }) => {
 const CardElement = ({ addCartItem, itemData }) => {
   return (
     <Card className="group w-56 cursor-pointer">
+      {itemData.isNew ? (
+        <Badge variant="" className="ml-4 -mt-2 absolute">
+          NEW
+        </Badge>
+      ) : null}
       <Link to={"/item/" + itemData.id}>
-        <CardHeader className="flex h-16 flex-row justify-between">
-          <div className="">
-            <CardTitle className="">{itemData.name}</CardTitle>
+        <div className="flex h-16 flex-row justify-between ">
+          <div className="ml-6 mt-6">
+            <CardTitle className="max-w-28">{itemData.name}</CardTitle>
             <CardDescription>{itemData.size}</CardDescription>
-            {itemData.isNew ? (
-              <Badge variant="" className="mt-1 absolute">
-                NEW
-              </Badge>
-            ) : null}
           </div>
-          <CardTitle className="text-2xl">${itemData.price}</CardTitle>
-        </CardHeader>
+          <div className="pr-6 pt-5 text-2xl bg-violet-500 text-white rounded-tr-md" style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%)'}}>
+            ${itemData.price}
+          </div>
+          <div
+            className=""
+          ></div>
+        </div>
 
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
