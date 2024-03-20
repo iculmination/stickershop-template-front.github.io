@@ -6,7 +6,6 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
   CardTitle,
 } from "../ui/card";
 
@@ -17,6 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
+
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
@@ -30,6 +30,7 @@ const HomeWithNew = ({ addCartItem }) => {
 
   useEffect(() => {
     getAllStickers({ isNew: true }).then(setStickers).catch();
+    window.scrollTo(0, 0);
     console.log(stickers);
   }, []);
 
@@ -113,23 +114,10 @@ const CardElement = ({ addCartItem, itemData }) => {
             </Badge>
           ) : null}
         </div>
-        {itemData.discount ? (
-          <div
-            className="absolute top-0 right-0 w-28 h-28 text-2xl bg-gradient-to-l from-violet-400 to-violet-600 text-white rounded-tr-md flex font-semibold"
-            style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%)" }}
-          >
-            <div className="rotate-45 flex justify-center w-40 pt-6 text-center gap-2">
-              <span className="line-through font-normal text-violet-200 text-xl ">
-                ${itemData.price}
-              </span>
-              <span className="">${itemData.price * 0.9}</span>
-            </div>
-          </div>
-        ) : (
-          <div className="absolute top-0 right-0 w-20 h-20 flex items-center text-2xl font-semibold justify-center">
-            ${itemData.price}
-          </div>
-        )}
+
+        <div className="absolute top-0 right-0 w-20 h-20 flex items-center text-2xl font-semibold justify-center">
+          ${itemData.discount ? itemData.price * 0.9 : itemData.price}
+        </div>
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img
