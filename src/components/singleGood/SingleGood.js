@@ -15,6 +15,7 @@ const SingleGood = ({ addCartItem }) => {
 
   useEffect(() => {
     getStickerById(itemId).then(setSticker).catch();
+    window.scrollTo(0, 0);
   }, []);
 
   const stickerColors =

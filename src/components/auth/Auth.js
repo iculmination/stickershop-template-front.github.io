@@ -1,7 +1,7 @@
 import google from "./2702602.png";
 import facebook from "./Facebook_Logo_(2019).png";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,6 +15,8 @@ import { motion } from "framer-motion";
 const Auth = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [auth, setAuth] = useState("login");
+
+  useEffect(() => window.scrollTo(0, 0), []);
 
   const navigate = useNavigate();
 

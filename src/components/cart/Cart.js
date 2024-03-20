@@ -3,8 +3,10 @@ import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 const Cart = ({ cartItems, removeCartItem, editCartItem }) => {
+  useEffect(() => window.scrollTo(0, 0), []);
   let total = 0;
   let totalItems = 0;
   cartItems.map((item) => {
