@@ -289,26 +289,38 @@ const Categories = ({ filters, setOptions }) => {
 
 const CardElement = ({ addCartItem, itemData }) => {
   return (
-    <Card className="group w-56 cursor-pointer">
+    <Card className="group w-56 cursor-pointer relative">
       {itemData.isNew ? (
-        <Badge variant="" className="ml-4 -mt-2 absolute">
+        <Badge variant="" className="ml-4 -mt-8 absolute">
           NEW
+        </Badge>
+      ) : itemData.discount ? (
+        <Badge variant="" className="ml-4 -mt-8 absolute">
+          DISCOUNT
         </Badge>
       ) : null}
       <Link to={"/item/" + itemData.id}>
-        <div className="flex h-16 flex-row justify-between ">
-          <div className="ml-6 mt-6">
-            <CardTitle className="max-w-28">{itemData.name}</CardTitle>
-            <CardDescription>{itemData.size}</CardDescription>
+        <div className="h-16 ml-6 mt-6">
+          <CardTitle className="max-w-28">{itemData.name}</CardTitle>
+          <CardDescription>{itemData.size}</CardDescription>
+        </div>
+        {itemData.discount ? (
+          <div
+            className="absolute top-0 right-0 w-28 h-28 text-2xl bg-gradient-to-l from-violet-400 to-violet-600 text-white rounded-tr-md flex font-semibold"
+            style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%)" }}
+          >
+            <div className="rotate-45 flex justify-center w-40 pt-6 text-center gap-2">
+              <span className="line-through font-normal text-violet-200 text-xl ">
+                ${itemData.price}
+              </span>
+              <span className="">${itemData.price * 0.9}</span>
+            </div>
           </div>
-          <div className="pr-6 pt-5 text-2xl bg-violet-500 text-white rounded-tr-md" style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%)'}}>
+        ) : (
+          <div className="absolute top-0 right-0 w-20 h-20 flex items-center text-2xl font-semibold justify-center">
             ${itemData.price}
           </div>
-          <div
-            className=""
-          ></div>
-        </div>
-
+        )}
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img

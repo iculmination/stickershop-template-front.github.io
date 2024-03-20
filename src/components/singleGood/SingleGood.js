@@ -48,13 +48,29 @@ const SingleGood = ({ addCartItem }) => {
           <h1 className="text-3xl font-semibold mb-2 flex">
             {sticker.name}
             {sticker.isNew ? (
-              <Badge variant="" className="mt-1 mb-1 ml-2">
+              <Badge variant="" className="mt-1 mb-1 ml-2 h-7">
                 NEW
+              </Badge>
+            ) : null}
+            {sticker.discount ? (
+              <Badge variant="" className="mt-1 mb-1 ml-2 h-7">
+                DISCOUNT
               </Badge>
             ) : null}
           </h1>
           <p className="text-gray-600 mb-4">Size: {sticker.size}</p>
-          <h2 className="text-2xl font-semibold mb-4">${sticker.price}</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            {sticker.discount ? (
+              <span>
+                <span className="line-through mr-2 text-gray-400 font-normal">
+                  ${sticker.price}
+                </span>
+                ${sticker.price * 0.9}
+              </span>
+            ) : (
+              <span>${sticker.price}</span>
+            )}
+          </h2>
           <CustomToast
             addCartItem={addCartItem}
             sticker={sticker}
