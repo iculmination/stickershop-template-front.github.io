@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import useStickersApi from "../stickers/StickersApi";
 import { useState, useEffect } from "react";
 import spinnerSvg from "../ui/Spinner-1.9s-204px.svg";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const HomeWithNew = ({ addCartItem }) => {
   const [stickers, setStickers] = useState({ stickers: [], count: 0 });
@@ -97,18 +97,39 @@ const HomeWithNew = ({ addCartItem }) => {
 
 const CardElement = ({ addCartItem, itemData }) => {
   return (
-    <Card className="group ">
+    <Card className="group cursor-pointer relative">
       <Link to={"/item/" + itemData.id}>
-        <CardHeader className="flex flex-row h-16 justify-between">
-          <div className="">
-            <CardTitle>{itemData.name}</CardTitle>
-            <CardDescription>{itemData.size}</CardDescription>
-            <Badge className="mt-1" variant="">
+        <div className="h-16 ml-6 mt-6">
+          <CardTitle className="max-w-28">{itemData.name}</CardTitle>
+          <CardDescription>{itemData.size}</CardDescription>
+          {itemData.isNew ? (
+            <Badge variant="" className="z-50 mr-1">
               NEW
             </Badge>
+          ) : null}
+          {itemData.discount ? (
+            <Badge variant="" className="z-50">
+              DISCOUNT
+            </Badge>
+          ) : null}
+        </div>
+        {itemData.discount ? (
+          <div
+            className="absolute top-0 right-0 w-28 h-28 text-2xl bg-gradient-to-l from-violet-400 to-violet-600 text-white rounded-tr-md flex font-semibold"
+            style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%)" }}
+          >
+            <div className="rotate-45 flex justify-center w-40 pt-6 text-center gap-2">
+              <span className="line-through font-normal text-violet-200 text-xl ">
+                ${itemData.price}
+              </span>
+              <span className="">${itemData.price * 0.9}</span>
+            </div>
           </div>
-          <CardTitle className="text-2xl">${itemData.price}</CardTitle>
-        </CardHeader>
+        ) : (
+          <div className="absolute top-0 right-0 w-20 h-20 flex items-center text-2xl font-semibold justify-center">
+            ${itemData.price}
+          </div>
+        )}
         <CardContent>
           <div className="flex flex-col justify-center items-center h-52">
             <img
